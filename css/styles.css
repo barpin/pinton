@@ -37,3 +37,35 @@
   .dropdown:hover .dropbtn {
     background-color: #3e8e41;
   }
+
+
+  .rowcont{
+
+    display:flex;
+    flex-direction:column;
+    height:auto;
+    align-content:space-around;
+    border: lightgray 0.1rem solid;
+    border-radius: 1rem;
+  }
+  .colcont{
+    display:flex;
+    flex-direction:row;
+    height:auto;
+    align-content:space-around;
+    border: lightgray 0.1rem solid;
+    border-radius: 1rem;
+  }
+
+  .donut{
+    width:50%;
+    aspect-ratio: 1/1;
+  }
+
+  .recharts-legend-item{
+    font-size: 0.8rem;
+  }
+  .stockinfo > div {
+    width:50%;
+    height:100%;
+  }
