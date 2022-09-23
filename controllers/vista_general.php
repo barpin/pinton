@@ -27,28 +27,28 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
 */
 ?>
 
-<div style="width:100vw;height:auto;" class="colcont">
+<div style="width:100%;height:auto;" class="colcont">
 
 
-  <div style="width:8vw;" class="rowcont">
+  <div class="rowcont sidebar">
     <div class="col-1">
       sidebar
     </div>
   </div>
     
-  <div style="width:90vw;" class="rowcont">
+  <div class="rowcont allcontentdiv">
     
         
     <div class="colcont" id='main_donuts'>
-      <div style="width:65%" class="rowcont" id='maingraph'>
+      <div class="rowcont" id='maingraph'>
         
           <span>Todos los productos hoy</span>
         
         <div style="width:100%;height:max(30vh, 100%)" class="colcont">
-          <div style="width:80%;height:100%;" id="graficolinea">
+          <div id="graficolinea">
             a
           </div>
-          <div style="width:20%;height:100%;" class="rowcont" id="masdatos">
+          <div style="" class="rowcont" id="masdatos">
           <span>Total</span>
             <div style="display:flex;color:red;align-items:flex-end;"><span>100$</span><span style="font-size:0.7rem;white-space:nowrap;">▼ 15%</span></div>
             <span>C. Ventas</span>
@@ -58,7 +58,7 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
           </div>
         </div>
       </div>
-      <div style="width:35%" class="rowcont" id='donuts'>
+      <div style="" class="rowcont" id='donuts'>
         <div class="">
           <span>Ventas por Categoría</span>
         </div>  
@@ -71,26 +71,26 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
       </div>
     </div>
     <div class="colcont" id='data_recent'>
-      <div style="width:35%" class="rowcont" id='numberdetails'>
+      <div style="" class="rowcont" id='numberdetails'>
         
         <span>Medio de Pago</span>
         <span>Efectivo</span>
-        <div style="width:100%" class="colcont">
+        <div style="width:100%" class="flex flex-row">
           <span>15$</span>
           <span>100$</span>
         </div>
         <span>Tarjeta</span>
-        <div style="width:100%" class="colcont">
+        <div style="width:100%" class="flex flex-row">
           <span>100$</span>
           <span>153,5$</span>
         </div>
         <span>MercadoPago</span>
-        <div style="width:100%" class="colcont">
+        <div style="width:100%" class="flex flex-row">
           <span>100$</span>
           <span>153,5$</span>
         </div>
       </div>
-      <div style="width:35%;height:100%;" class="rowcont" id='stock_graphs'>
+      <div style="" class="rowcont" id='stock_graphs'>
         <div style="width:100%;height:33%;" class="colcont" id='stockrow1'>
           <div style="width:100%;height:100%;" class="colcont stockinfo" id='stock1'>
             <div>
@@ -158,9 +158,9 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
           </div>
         </div>  
       </div>
-      <div style="width:30%" class="rowcont" id='stock_graphs'>
+      <div style="" class="rowcont" id='compras_recientes'>
         <span>Compras recientes</span>
-        <div style="width:100%" class="rowcont" id='stock_graphs'>
+        <div style="width:100%" class="rowcont" id='compras_recientes_content'>
         
         </div>
       </div>

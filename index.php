@@ -4,8 +4,9 @@ require_once p.'assets/session_start.php';
 
 require_once p.'assets/database.php';
 
-if (!$loggedin){
-    
+if (!isset($_SESSION["id"])){
+  header('Location: ./controllers/login.php');
+  exit;
 }
 
 

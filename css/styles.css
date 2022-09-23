@@ -1,3 +1,6 @@
+html,body {margin:0;padding:0}
+html{overflow-y:scroll}
+
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -44,7 +47,7 @@
     display:flex;
     flex-direction:column;
     height:auto;
-    align-content:space-around;
+    align-items:space-around;
     border: lightgray 0.1rem solid;
     border-radius: 1rem;
   }
@@ -52,10 +55,103 @@
     display:flex;
     flex-direction:row;
     height:auto;
-    align-content:space-around;
+    justify-content:space-around;
     border: lightgray 0.1rem solid;
     border-radius: 1rem;
   }
+  
+  .sidebar{
+	  width:8vw;
+  }
+  
+  .allcontentdiv{
+	  width:90vw;
+  }
+
+
+#maingraph{
+	width:65%;
+}
+
+#graficolinea{
+	width:80%;height:100%;
+}
+
+#masdatos{
+	width:20%;height:100%;
+}
+
+#donuts{
+	width:35%;
+	aspect-ratio: 1/1;
+}
+
+#donutrow1, #donutrow2 {
+	height:50%;
+	align-items:center;
+}
+
+#numberdetails{
+	width:20%;
+}
+#stock_graphs{
+	width:40%;height:100%;
+}
+
+#compras_recientes{
+	width:40%;
+}
+
+
+@media only screen and (max-width: 800px) {
+      .colcont{
+    display:flex;
+    flex-direction:column;
+    height:auto;
+    justify-content:space-between;
+    border: lightgray 0.1rem solid;
+    border-radius: 1rem;
+  }
+  .sidebar{
+	  width:100vw;
+	  flex-direction:row;
+  }
+  .allcontentdiv{
+	  width:100vw;
+  }
+  #maingraph{
+	width:100%;
+	}
+	#graficolinea{
+	width:100%;height:50vh%;
+}
+#masdatos{
+	width:100%;height:100%;
+}
+
+#donuts{
+	width:100%;
+	aspect-ratio: 1/1;
+}
+#donutrow1, #donutrow2 {
+	height:100%;
+	align-items:center;
+}
+#numberdetails{
+	width:100%;
+}
+#stock_graphs{
+	width:100%;height:100%;
+}
+
+.stockinfo{
+	flex-direction:row;
+}
+
+#compras_recientes{
+	width:100%;
+}
+}
 
   .donut{
     width:50%;

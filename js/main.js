@@ -142,7 +142,7 @@ const pages = {
 
 function getpage(pagename) {
   console.log(pagename);
-  fetch("/controllers/" + pagename + '.php', {
+  fetch("./controllers/" + pagename + '.php', {
     method: "GET",
     credentials: 'same-origin',
     mode: 'same-origin',
@@ -208,10 +208,10 @@ class Linechart extends React.PureComponent {
       height: 300,
       data: this.props.value,
       margin: {
-        top: 5,
+      //  top: 5,
         right: 30,
-        left: 20,
-        bottom: 5
+      //  left: 20,
+      //  bottom: 5
       }
     }, /*#__PURE__*/React.createElement(Recharts.CartesianGrid, {
       strokeDasharray: "3 3"

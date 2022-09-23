@@ -1,4 +1,6 @@
 <?php 
+define('p', '../');
+
 session_start();
 session_unset();
 session_destroy();
@@ -6,7 +8,7 @@ session_destroy();
 if (isset($_GET['url'])){
     header('Location: '.$_GET['url']);
 } else {
-    header('Location: /');
+    header('Location: '.p);
 }
 
 
