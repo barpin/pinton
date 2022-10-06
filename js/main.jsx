@@ -2,7 +2,6 @@
 //import { PureComponent } from "react";
 //import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 const e = React.createElement;
-
 function p(input){
     console.log(input);
     return input;
@@ -24,7 +23,7 @@ const pages = {
         for (let x=0;x<donuts.length;x++){
             donuts[x].render(<DataPies value={
                 [
-                    { name: 'A1', value: 100 },
+                    { name: 'A1', value: 200 },
                     { name: 'A2', value: 300 },
                     { name: 'B1', value: 100 },
                     { name: 'B2', value: 80 },

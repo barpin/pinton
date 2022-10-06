@@ -42,7 +42,28 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
     <div class="colcont" id='main_donuts'>
       <div class="rowcont" id='maingraph'>
         
-          <span>Todos los productos hoy</span>
+          <span>
+            <select name="dog-names" id="dog-names">
+              <option value="hoy" default>Todas</option>
+              <option value="ayer">filtro categoria</option>
+              <option value="semana">filtro precio</option>
+            </select>
+            las 
+            <select name="dog-names" id="dog-names">
+              <option value="hoy" default>ventas</option>
+              <option value="ayer">reabastecimientos</option>
+              <option value="semana">ultima semana</option>
+            </select>
+            <select name="dog-names" id="dog-names">
+              <option value="hoy" default>hoy</option>
+              <option value="ayer">ayer</option>
+              <option value="semana">ultima semana</option>
+              <option value="mes">ultimo mes</option>
+              <option value="todo">todo</option>
+              <option value="rango">entre {} y {}</option>
+            </select>
+
+          </span>
         
         <div style="width:100%;height:max(30vh, 100%)" class="colcont">
           <div id="graficolinea">
@@ -60,7 +81,14 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
       </div>
       <div style="" class="rowcont" id='donuts'>
         <div class="">
-          <span>Ventas por Categoría</span>
+          <span>
+            Ventas por 
+            <select name="dog-names" id="dog-names">
+              <option value="hoy" default>Categoría</option>
+              <option value="ayer">filtro categoria</option>
+              <option value="semana">filtro precio</option>
+            </select>
+          </span>
         </div>  
         <div style="width:100%" class="colcont" id='donutrow1'>
           <div class="donut" >donut1</div><div class="donut">donut2</div>

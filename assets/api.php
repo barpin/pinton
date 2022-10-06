@@ -1,10 +1,10 @@
 <?php
 header("Content-type: application/json; charset=utf-8");
-
-require_once 'assets/database.php';
+define('p', '../');
+require_once p.'assets/database.php';
 
 function authenticate($perms=false){ //TODO real authentication (Oauth?)
-    require_once 'assets/session_start.php'; 
+    require_once p.'assets/session_start.php'; 
     
     if (isset($_SESSION['id'])){
         if ($perms){
