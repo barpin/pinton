@@ -5,12 +5,13 @@ require_once('../assets/api.php');
 $range = getpost("rango");
 authenticate();
 
+//[fecha minima, fecha maxima, fecha minima anterior]
 $dates=[
-  "hoy"=>["DATE(fecha_y_hora)",                         "DATE_ADD(DATE(now()), INTERVAL 1 DAY) ", "DATE_ADD(DATE(fecha_y_hora, INTERVAL -1 DAY))"],
-  "ayer"=>["DATE_ADD(fecha_y_hora, INTERVAL -1 DAY)",   "DATE(NOW())",                            "DATE_ADD(DATE(fecha_y_hora, INTERVAL -2 DAY))"],
-  "semana"=>["DATE_ADD(fecha_y_hora, INTERVAL -7 DAY)", "NOW()",                                  "DATE_ADD(DATE(fecha_y_hora, INTERVAL -14 DAY))"],
-  "mes"=>["DATE_ADD(fecha_y_hora, INTERVAL -30 DAY)",   "NOW()",                                  "DATE_ADD(DATE(fecha_y_hora, INTERVAL -60 DAY))"],
-  "todo"=>["2000-01-01 01:00:00",                       "NOW()",                                  "DATE_ADD(DATE(fecha_y_hora, INTERVAL -42323 DAY))"],
+  "hoy"=>["DATE(now())",                         "DATE_ADD(DATE(now()), INTERVAL 1 DAY) ", "DATE_ADD(DATE(NOW()), INTERVAL -1 DAY)"],
+  "ayer"=>["DATE_ADD(DATE(now()), INTERVAL -1 DAY)",   "DATE(NOW())",                            "DATE_ADD(DATE(NOW()), INTERVAL -2 DAY)"],
+  "semana"=>["DATE_ADD(DATE(now()), INTERVAL -7 DAY)", "NOW()",                                  "DATE_ADD(DATE(NOW()), INTERVAL -14 DAY)"],
+  "mes"=>["DATE_ADD(DATE(now()), INTERVAL -30 DAY)",   "NOW()",                                  "DATE_ADD(DATE(NOW()), INTERVAL -60 DAY)"],
+  "todo"=>["2000-01-01 01:00:00",                       "NOW()",                                  "DATE_ADD(DATE(NOW()), INTERVAL -42323 DAY)"],
   "rango"=>["TODO",""]
 ];
 

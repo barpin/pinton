@@ -1,5 +1,7 @@
 <?php
 require_once('../assets/api.php');
+//$range = getpost("rango");
+
 ?>
 [
 <?php include("maingraph.php") ?>,

@@ -123,7 +123,7 @@ html{overflow-y:scroll}
 	width:100%;
 	}
 	#graficolinea{
-	width:100%;height:50vh%;
+	width:100%;height:50vh;
 }
 #masdatos{
 	width:100%;height:100%;
@@ -156,6 +156,10 @@ html{overflow-y:scroll}
   .donut{
     width:50%;
     aspect-ratio: 1/1;
+  }
+  .donutwide{
+    width:100%;
+    aspect-ratio: 2/1;
   }
 
   .recharts-legend-item{

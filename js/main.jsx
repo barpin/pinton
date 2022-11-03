@@ -2,47 +2,89 @@
 //import { PureComponent } from "react";
 //import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 const e = React.createElement;
+//var ptrigcount=0;
 function p(input){
     console.log(input);
     return input;
 }
 
+var flinea;
+var donuts;
+var stonks;
+var stockgraphs;
+var bigdonut;
+
+
 var contentbox = document.querySelector('#content');
 console.log('working');
 
 const pages = {
-    'vista_general': ()=>{
-        let flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
-        let donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>ReactDOM.createRoot(x));
-        let stonks = document.querySelectorAll('.stockinfo');
-        let stockgraphs = Array.prototype.map.call(stonks, x=>ReactDOM.createRoot(x.children[0]));
-        console.log(donuts);
-        flinea.render(<Linechart value={
-            [{name: 'Page A',uv: 4000,pv: 2400,amt: 2400,},{name: 'Page B',uv: 3000,pv: 1398,amt: 2210,},{name: 'Page C',uv: 2000,pv: 9800,amt: 2290,},{name: 'Page D',uv: 2780,pv: 3908,amt: 2000,},{name: 'Page E',uv: 1890,pv: 4800,amt: 2181,},{name: 'Page F',uv: 2390,pv: 3800,amt: 2500,},{name: 'Page G',uv: 3490,pv: 4300,amt: 2100,},]
-        }/>);
-        for (let x=0;x<donuts.length;x++){
-            donuts[x].render(<DataPies value={
-                [
-                    { name: 'A1', value: 200 },
-                    { name: 'A2', value: 300 },
-                    { name: 'B1', value: 100 },
-                    { name: 'B2', value: 80 },
-                    { name: 'B3', value: 40 },
-                    { name: 'B4', value: 30 },
-                    { name: 'B5', value: 50 },
-                    { name: 'C1', value: 100 },
-                    { name: 'C2', value: 200 },
-                    { name: 'D1', value: 150 },
-                    { name: 'D2', value: 50 },
-                  ]
+    'vista_general': (fecha="hoy")=>{
+
+
+
+        fetch("./api/vista_general.php?rango="+fecha, {
+            method:"GET",
+            credentials: 'same-origin', 
+            mode: 'same-origin',
+            cache: 'no-cache',
+        })
+        .then((response) => response.text()).then((htmlresponse)=>{
+            apiresponse=JSON.parse(htmlresponse);
+            
+
+            if (!document.querySelector('#graficolinea').firstElementChild ){
+                flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
+                donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>ReactDOM.createRoot(x));
+                stonks = document.querySelectorAll('.stockinfo');
+                stockgraphs = Array.prototype.map.call(stonks, x=>ReactDOM.createRoot(x.children[0]));
+                bigdonut = ReactDOM.createRoot(document.querySelector('.donutwide'));
+            } 
+            
+            
+            console.log(donuts);
+            flinea.render(<Linechart value={
+                apiresponse[0].map(x=>{
+                    return {name:x["fecha_grupo"], monto:Number(x["preciofinal"])}
+                })
+            }/>);
+            for (let x=0;x<donuts.length;x++){
+                donuts[x].render(<DataPies value={
+                    apiresponse[1][x+1].map(x=>{
+                        return {name:x["name"], value:Number(x["count"])}
+                    })
+                } />)
+            }
+
+            bigdonut.render(<BigDataPies value={
+                apiresponse[1][0].map(x=>{
+                    return {name:x["name"], value:Number(x["count"])}
+                })
             } />)
-        }
-        for (let x=0;x<stockgraphs.length;x++){
-            stockgraphs[x].render(<Stockchart value={
-                [{name: 'Page A',uv: 4000,pv: 2400,amt: 2400,},{name: 'Page B',uv: 3000,pv: 1398,amt: 2210,},{name: 'Page C',uv: 2000,pv: 9800,amt: 2290,},{name: 'Page D',uv: 2780,pv: 3908,amt: 2000,},{name: 'Page E',uv: 1890,pv: 4800,amt: 2181,},{name: 'Page F',uv: 2390,pv: 3800,amt: 2500,},{name: 'Page G',uv: 3490,pv: 4300,amt: 2100,},]
-            }/>)
-        }
-        return 1;
+
+
+            for (let x=0;x<stockgraphs.length;x++){
+                stockgraphs[x].render(<Stockchart value={
+                    [{name: 'Page A',uv: 4000,pv: 2400,amt: 2400,},{name: 'Page B',uv: 3000,pv: 1398,amt: 2210,},{name: 'Page C',uv: 2000,pv: 9800,amt: 2290,},{name: 'Page D',uv: 2780,pv: 3908,amt: 2000,},{name: 'Page E',uv: 1890,pv: 4800,amt: 2181,},{name: 'Page F',uv: 2390,pv: 3800,amt: 2500,},{name: 'Page G',uv: 3490,pv: 4300,amt: 2100,},]
+                }/>)
+            }
+
+            //document.querySelector("#date-select").addEventListener('change', updateVistaGeneral(), false);
+
+
+
+            return 1;
+        
+
+            
+
+        }).catch((error) => {
+            console.log(error);
+            return 0;
+        });
+
+
+
     }
 
 }
@@ -74,6 +116,15 @@ function getRandomColor() { //TODO: better colors
   return color;
 }
 
+function updateVistaGeneral(){
+    //if (ptrigcount==0){
+    //    ptrigcount++
+    //} else {
+        pages['vista_general'](document.querySelector("#date-select").value)
+    //}
+    //
+
+}
 
 //----------------------------------Main Page stuff------------------------------------
 
@@ -99,9 +150,25 @@ class DataPies extends React.PureComponent {
         </Recharts.ResponsiveContainer>
       );
     }
-  }
+}
   
+class BigDataPies extends React.PureComponent {
+  
+    render() {
+      return (
+          <Recharts.PieChart width={350} height={150}>
+            <Recharts.Pie data={this.props.value} dataKey="value" cx="50%" cy="50%" innerRadius={30} outerRadius={52} fill="#82ca9d" > //label
+                {this.props.value.map((entry, index) => (
+                    <Recharts.Cell key={`cell-${index}`} fill={getRandomColor()} />
+                ))}
+            </Recharts.Pie>
+            <Recharts.Tooltip />
+            <Recharts.Legend align="right" verticalAlign="middle" width="150px" iconSize="8px" />
 
+          </Recharts.PieChart>
+      );
+    }
+}
 
 
 class Linechart extends React.PureComponent {
@@ -125,13 +192,13 @@ class Linechart extends React.PureComponent {
             <Recharts.YAxis />
             <Recharts.Tooltip />
             <Recharts.Legend />
-            <Recharts.Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Recharts.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            <Recharts.Line type="monotone" dataKey="monto" stroke="#8884d8" activeDot={{ r: 8 }} />
             </Recharts.LineChart>
         </Recharts.ResponsiveContainer>
         );
     }
 }
+//<Recharts.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
 
 
 class Stockchart extends React.PureComponent {
@@ -162,5 +229,6 @@ function mainpage(){
 
 
 mainpage()*/
+
 
 getpage('vista_general')

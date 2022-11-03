@@ -54,7 +54,7 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
               <option value="ayer">reabastecimientos</option>
               <option value="semana">ultima semana</option>
             </select>
-            <select name="dog-names" id="dog-names">
+            <select name="date-select" id="date-select" onchange="updateVistaGeneral()">
               <option value="hoy" default>hoy</option>
               <option value="ayer">ayer</option>
               <option value="semana">ultima semana</option>
@@ -91,7 +91,7 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
           </span>
         </div>  
         <div style="width:100%" class="colcont" id='donutrow1'>
-          <div class="donut" >donut1</div><div class="donut">donut2</div>
+          <div class="donutwide" >donut1</div><!--<div class="donut">donut2</div>-->
         </div>
         <div style="width:100%;align-content:space-around" class="colcont" id="donutrow2">
           <div class="donut">dpnut3</div><div class="donut">donut4</div>
