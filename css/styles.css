@@ -169,3 +169,14 @@ html{overflow-y:scroll}
     width:50%;
     height:100%;
   }
+
+  .receientescell{
+    padding-bottom: 1em;
+    padding-left: 1em;
+
+  }
+
+  tbody{
+    width: 100%;
+    display: table;
+}

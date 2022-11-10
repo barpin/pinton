@@ -19,6 +19,7 @@ $dates=[
 
 //echo "SELECT {$dates[$rango][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$rango][1]} AND fecha_y_hora < {$dates[$rango][2]} GROUP BY fecha_grupo ";
 
+//vantas x categoria
 $arraydonuts=[entries(<<<EOL
     SELECT max(categorias_productos.ID) as id, categorias_productos.name, count(categorias_productos.name) as count FROM compras 
     INNER JOIN productos ON compras.productoID=productos.ID 
@@ -28,18 +29,34 @@ $arraydonuts=[entries(<<<EOL
     ORDER BY count DESC
     EOL)];
 
+//ventas x producto
+$arraydonuts[]=entries(<<<EOL
+  SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+  INNER JOIN productos ON productos.ID = productoID  
+  WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+  GROUP BY productoID
+  ORDER BY count DESC
+  EOL);
 
-for ($i=0;$i< min(3, count($arraydonuts[0])) ;$i++){
-    array_push($arraydonuts, entries(<<<EOL
-        SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
-        INNER JOIN productos ON productos.ID = productoID  
-        WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
-        AND categoryID={$arraydonuts[0][$i]['id']}
-        GROUP BY productoID
-        ORDER BY count DESC
-        EOL) );
+//productos x cat mas popular
+$arraydonuts[]=entries(<<<EOL
+  SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+  INNER JOIN productos ON productos.ID = productoID  
+  WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+  AND categoryID={$arraydonuts[0][0]['id']}
+  GROUP BY productoID
+  ORDER BY count DESC
+  EOL);
 
-}
+//bebidas
+$arraydonuts[]=entries(<<<EOL
+  SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+  INNER JOIN productos ON productos.ID = productoID  
+  WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+  AND categoryID>3
+  GROUP BY productoID
+  ORDER BY count DESC
+  EOL);
 
 echo(json_encode($arraydonuts));
 

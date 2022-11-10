@@ -12,7 +12,7 @@ var flinea;
 var donuts;
 var stonks;
 var stockgraphs;
-var bigdonut;
+
 
 
 var contentbox = document.querySelector('#content');
@@ -32,38 +32,38 @@ const pages = {
         .then((response) => response.text()).then((htmlresponse)=>{
             apiresponse=JSON.parse(htmlresponse);
             
-
+            //CREAR ROOTS DE REACT SI NO ESTAN CREADAS
             if (!document.querySelector('#graficolinea').firstElementChild ){
                 flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
                 donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>ReactDOM.createRoot(x));
                 stonks = document.querySelectorAll('.stockinfo');
                 stockgraphs = Array.prototype.map.call(stonks, x=>ReactDOM.createRoot(x.children[0]));
-                bigdonut = ReactDOM.createRoot(document.querySelector('.donutwide'));
             } 
             
             
-            console.log(donuts);
+            //console.log(donuts);
+
+            //ARMAR GRAFICO DE LINEA PRINCIPAL
             flinea.render(<Linechart value={
                 apiresponse[0].map(x=>{
                     return {name:x["fecha_grupo"], monto:Number(x["preciofinal"])}
                 })
             }/>);
+
+            donutdata=apiresponse[1];
+            //ARMAR GRAFICOS DE DONAS
+
+            
             for (let x=0;x<donuts.length;x++){
-                if (x+1<apiresponse[1].length )
                 donuts[x].render(<DataPies value={
-                    apiresponse[1][x+1].map(x=>{
+                    apiresponse[1][x].map(x=>{
                         return {name:x["name"], value:Number(x["count"])}
                     })
                 } />)
             }
-            if (apiresponse[1].length )
-            bigdonut.render(<BigDataPies value={
-                apiresponse[1][0].map(x=>{
-                    return {name:x["name"], value:Number(x["count"])}
-                })
-            } />)
+            
 
-
+            //ARMAR GRAFICOS DE STOCK
             for (let x=0;x<stockgraphs.length;x++){
                 stockgraphs[x].render(<Stockchart value={
                     [{name: 'Page A',uv: 4000,pv: 2400,amt: 2400,},{name: 'Page B',uv: 3000,pv: 1398,amt: 2210,},{name: 'Page C',uv: 2000,pv: 9800,amt: 2290,},{name: 'Page D',uv: 2780,pv: 3908,amt: 2000,},{name: 'Page E',uv: 1890,pv: 4800,amt: 2181,},{name: 'Page F',uv: 2390,pv: 3800,amt: 2500,},{name: 'Page G',uv: 3490,pv: 4300,amt: 2100,},]
@@ -72,6 +72,7 @@ const pages = {
 
             //document.querySelector("#date-select").addEventListener('change', updateVistaGeneral(), false);
 
+            //ARMAR DATOS DE COMPTA
             let ventas=document.querySelector("#totalventas");
             let nventas=document.querySelector("#cantventas");
       
@@ -84,17 +85,37 @@ const pages = {
             nventas.childNodes[1].innerHTML=(apiresponse[2]["cantidad"][1]>0 ? "▲":"▼")+Math.round(apiresponse[2]["cantidad"][1])+"%";
             nventas.style.color=apiresponse[2]["cantidad"][1]>0 ? "green":"red";
 
+            //ARMAR COMPRAS RECIENTES
             let recientes = document.querySelector("#compras_recientes_content");
+            let tmpelstr="";
             apiresponse[4].forEach(element => {
+                tmpelstr+=`
+                <tr class="" style="width:100%;">
+                    <td class="receientescell" style="width:25%">
+                        <span>${element["fecha_y_hora"].substr(0,10)}</span><br>
+                        <span style="font-size:0.9rem;color:gray;">${element["fecha_y_hora"].substr(10,10)}</span>
+                    </td>
+                    <td  class="receientescell" style="width:50%">
+                        ${element["name"]} ${ (element["cantidad"]>1 ? `<span>×${element["cantidad"]}</span>`:"") }
+                    </td>
+                    <td class="receientescell" style="color:green;width:25%">
+                        $ ${element["precio"]}
+                    </td>
+                
+                </tr>
+                `
+                
+                /*
                 childnode = document.createElement("div");
                 childnode.classList.add("colcont");
 
                 recientes?.appendChild(
                     childnode
                 );
-                console.log(element);
+                console.log(element);*/
             });
-
+            recientes.innerHTML= tmpelstr;
+            
 
             return 1;
         
@@ -175,23 +196,9 @@ class DataPies extends React.PureComponent {
     }
 }
   
-class BigDataPies extends React.PureComponent {
-  
-    render() {
-      return (
-          <Recharts.PieChart width={350} height={150}>
-            <Recharts.Pie data={this.props.value} dataKey="value" cx="50%" cy="50%" innerRadius={30} outerRadius={52} fill="#82ca9d" > //label
-                {this.props.value.map((entry, index) => (
-                    <Recharts.Cell key={`cell-${index}`} fill={getRandomColor()} />
-                ))}
-            </Recharts.Pie>
-            <Recharts.Tooltip />
-            <Recharts.Legend align="right" verticalAlign="middle" width="150px" iconSize="8px" />
 
-          </Recharts.PieChart>
-      );
-    }
-}
+
+
 
 
 class Linechart extends React.PureComponent {

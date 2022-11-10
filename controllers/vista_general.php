@@ -82,16 +82,11 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
       <div style="" class="rowcont" id='donuts'>
         <div class="">
           <span>
-            Ventas por 
-            <select name="dog-names" id="dog-names">
-              <option value="hoy" default>Categoría</option>
-              <option value="ayer">filtro categoria</option>
-              <option value="semana">filtro precio</option>
-            </select>
+            Ventas por Categorias
           </span>
         </div>  
-        <div style="width:100%" class="colcont" id='donutrow1'>
-          <div class="donutwide" >donut1</div><!--<div class="donut">donut2</div>-->
+        <div style="width:100%;align-content:space-around" class="colcont" id='donutrow1'>
+        <div class="donut">dpnut3</div><div class="donut">donut4</div>
         </div>
         <div style="width:100%;align-content:space-around" class="colcont" id="donutrow2">
           <div class="donut">dpnut3</div><div class="donut">donut4</div>
@@ -186,11 +181,11 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
           </div>
         </div>  
       </div>
-      <div style="" class="rowcont" id='compras_recientes'>
+      <div style="max-height:35vh;overflow:auto;" class="rowcont overflow-auto" id='compras_recientes'>
         <span>Compras recientes</span>
-        <div style="width:100%" class="rowcont" id='compras_recientes_content'>
+        <table style="width:100%;display:block;" class="" id='compras_recientes_content'>
         
-        </div>
+        </table>
       </div>
     </div>
     

@@ -1,18 +1,16 @@
 //import React from "react";
 //import { PureComponent } from "react";
 //import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-const e = React.createElement; //var ptrigcount=0;
-
+const e = React.createElement;
+//var ptrigcount=0;
 function p(input) {
   console.log(input);
   return input;
 }
-
 var flinea;
 var donuts;
 var stonks;
 var stockgraphs;
-var bigdonut;
 var contentbox = document.querySelector('#content');
 console.log('working');
 const pages = {
@@ -25,15 +23,17 @@ const pages = {
     }).then(response => response.text()).then(htmlresponse => {
       apiresponse = JSON.parse(htmlresponse);
 
+      //CREAR ROOTS DE REACT SI NO ESTAN CREADAS
       if (!document.querySelector('#graficolinea').firstElementChild) {
         flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
         donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x => ReactDOM.createRoot(x));
         stonks = document.querySelectorAll('.stockinfo');
         stockgraphs = Array.prototype.map.call(stonks, x => ReactDOM.createRoot(x.children[0]));
-        bigdonut = ReactDOM.createRoot(document.querySelector('.donutwide'));
       }
 
-      console.log(donuts);
+      //console.log(donuts);
+
+      //ARMAR GRAFICO DE LINEA PRINCIPAL
       flinea.render( /*#__PURE__*/React.createElement(Linechart, {
         value: apiresponse[0].map(x => {
           return {
@@ -42,10 +42,12 @@ const pages = {
           };
         })
       }));
+      donutdata = apiresponse[1];
+      //ARMAR GRAFICOS DE DONAS
 
       for (let x = 0; x < donuts.length; x++) {
-        if (x + 1 < apiresponse[1].length) donuts[x].render( /*#__PURE__*/React.createElement(DataPies, {
-          value: apiresponse[1][x + 1].map(x => {
+        donuts[x].render( /*#__PURE__*/React.createElement(DataPies, {
+          value: apiresponse[1][x].map(x => {
             return {
               name: x["name"],
               value: Number(x["count"])
@@ -54,15 +56,7 @@ const pages = {
         }));
       }
 
-      if (apiresponse[1].length) bigdonut.render( /*#__PURE__*/React.createElement(BigDataPies, {
-        value: apiresponse[1][0].map(x => {
-          return {
-            name: x["name"],
-            value: Number(x["count"])
-          };
-        })
-      }));
-
+      //ARMAR GRAFICOS DE STOCK
       for (let x = 0; x < stockgraphs.length; x++) {
         stockgraphs[x].render( /*#__PURE__*/React.createElement(Stockchart, {
           value: [{
@@ -102,9 +96,11 @@ const pages = {
             amt: 2100
           }]
         }));
-      } //document.querySelector("#date-select").addEventListener('change', updateVistaGeneral(), false);
+      }
 
+      //document.querySelector("#date-select").addEventListener('change', updateVistaGeneral(), false);
 
+      //ARMAR DATOS DE COMPTA
       let ventas = document.querySelector("#totalventas");
       let nventas = document.querySelector("#cantventas");
       ventas.childNodes[0].innerHTML = "$" + apiresponse[2]["total"][0];
@@ -113,13 +109,37 @@ const pages = {
       nventas.childNodes[0].innerHTML = +apiresponse[2]["cantidad"][0];
       nventas.childNodes[1].innerHTML = (apiresponse[2]["cantidad"][1] > 0 ? "▲" : "▼") + Math.round(apiresponse[2]["cantidad"][1]) + "%";
       nventas.style.color = apiresponse[2]["cantidad"][1] > 0 ? "green" : "red";
+
+      //ARMAR COMPRAS RECIENTES
       let recientes = document.querySelector("#compras_recientes_content");
+      let tmpelstr = "";
       apiresponse[4].forEach(element => {
+        tmpelstr += `
+                <tr class="" style="width:100%;">
+                    <td class="receientescell" style="width:25%">
+                        <span>${element["fecha_y_hora"].substr(0, 10)}</span><br>
+                        <span style="font-size:0.9rem;color:gray;">${element["fecha_y_hora"].substr(10, 10)}</span>
+                    </td>
+                    <td  class="receientescell" style="width:50%">
+                        ${element["name"]} ${element["cantidad"] > 1 ? `<span>×${element["cantidad"]}</span>` : ""}
+                    </td>
+                    <td class="receientescell" style="color:green;width:25%">
+                        $ ${element["precio"]}
+                    </td>
+                
+                </tr>
+                `;
+
+        /*
         childnode = document.createElement("div");
         childnode.classList.add("colcont");
-        recientes?.appendChild(childnode);
-        console.log(element);
+          recientes?.appendChild(
+            childnode
+        );
+        console.log(element);*/
       });
+
+      recientes.innerHTML = tmpelstr;
       return 1;
     }).catch(error => {
       console.log(error);
@@ -127,7 +147,6 @@ const pages = {
     });
   }
 };
-
 function getpage(pagename) {
   console.log(pagename);
   fetch("./controllers/" + pagename + '.php', {
@@ -143,27 +162,25 @@ function getpage(pagename) {
     return 0;
   });
 }
-
 function getRandomColor() {
   //TODO: better colors
   var letters = '0123456789ABCDEF';
   var color = '#';
-
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
-
   return color;
 }
-
 function updateVistaGeneral() {
   //if (ptrigcount==0){
   //    ptrigcount++
   //} else {
-  pages['vista_general'](document.querySelector("#date-select").value); //}
+  pages['vista_general'](document.querySelector("#date-select").value);
+  //}
   //
-} //----------------------------------Main Page stuff------------------------------------
+}
 
+//----------------------------------Main Page stuff------------------------------------
 
 class DataPies extends React.PureComponent {
   render() {
@@ -191,35 +208,7 @@ class DataPies extends React.PureComponent {
       iconSize: "8px"
     })));
   }
-
 }
-
-class BigDataPies extends React.PureComponent {
-  render() {
-    return /*#__PURE__*/React.createElement(Recharts.PieChart, {
-      width: 350,
-      height: 150
-    }, /*#__PURE__*/React.createElement(Recharts.Pie, {
-      data: this.props.value,
-      dataKey: "value",
-      cx: "50%",
-      cy: "50%",
-      innerRadius: 30,
-      outerRadius: 52,
-      fill: "#82ca9d"
-    }, " //label", this.props.value.map((entry, index) => /*#__PURE__*/React.createElement(Recharts.Cell, {
-      key: `cell-${index}`,
-      fill: getRandomColor()
-    }))), /*#__PURE__*/React.createElement(Recharts.Tooltip, null), /*#__PURE__*/React.createElement(Recharts.Legend, {
-      align: "right",
-      verticalAlign: "middle",
-      width: "150px",
-      iconSize: "8px"
-    }));
-  }
-
-}
-
 class Linechart extends React.PureComponent {
   render() {
     return /*#__PURE__*/React.createElement(Recharts.ResponsiveContainer, {
@@ -231,9 +220,9 @@ class Linechart extends React.PureComponent {
       data: this.props.value,
       margin: {
         //    top: 5,
-        right: 30 //    left: 20,
+        right: 30
+        //    left: 20,
         //    bottom: 5,
-
       }
     }, /*#__PURE__*/React.createElement(Recharts.CartesianGrid, {
       strokeDasharray: "3 3"
@@ -248,9 +237,8 @@ class Linechart extends React.PureComponent {
       }
     })));
   }
-
-} //<Recharts.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-
+}
+//<Recharts.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
 
 class Stockchart extends React.PureComponent {
   render() {
@@ -266,8 +254,8 @@ class Stockchart extends React.PureComponent {
       dot: ""
     })));
   }
-
 }
+
 /*
 function mainpage(){
     var a=getpage('vista_general');
@@ -278,6 +266,5 @@ function mainpage(){
 
 
 mainpage()*/
-
 
 getpage('vista_general');
