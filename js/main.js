@@ -27,6 +27,7 @@ const pages = {
       if (!document.querySelector('#graficolinea').firstElementChild) {
         flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
         donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x => ReactDOM.createRoot(x));
+        //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>new ApexCharts(x, {chart: {id: `donutChart${x}`}}));
         stonks = document.querySelectorAll('.stockinfo');
         stockgraphs = Array.prototype.map.call(stonks, x => ReactDOM.createRoot(x.children[0]));
       }
@@ -55,7 +56,11 @@ const pages = {
           })
         }));
       }
-
+      /*
+      for (let x=0;x<donuts.length;x++){
+          donuts[x].updateSeries([44, 55, 13, 43, 22])
+      }
+      */
       //ARMAR GRAFICOS DE STOCK
       for (let x = 0; x < stockgraphs.length; x++) {
         stockgraphs[x].render( /*#__PURE__*/React.createElement(Stockchart, {
