@@ -2,6 +2,11 @@
 //recibe en get o post a "rango". 
 //devuelve una lista de puntos de valor y eso
 // UPDATE compras set fecha_y_hora=DATE_ADD(now(), INTERVAL -(ROUND(RAND()*12)) HOUR)
+//UPDATE compras set fecha_y_hora=DATE_ADD(now(), INTERVAL -((RAND()*8766)) HOUR);
+//insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	
+//UPDATE compras set precio=RAND()*3000
+
+//SELECT ingredientes.id as ingid, max(ingredientes.name), SUM(amount*cantidad) as stock FROM ingredientes INNER JOIN receta ON receta.ingredientID = ingredientes.id INNER JOIN compras ON compras.productoID = receta.productID GROUP BY ingredientes.id;
 
 require_once('../assets/api.php');
 

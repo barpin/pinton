@@ -17,8 +17,9 @@ $dates=[
 
 //echo "SELECT {$dates[$rango][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$rango][1]} AND fecha_y_hora < {$dates[$rango][2]} GROUP BY fecha_grupo ";
 
+//viejo, nuevo
 function percentdiff($n1, $n2){
-  return ($n1-$n2)/(($n1+$n2)/2)
+  return intval($n2) ? $n2/$n1*100-100 : 999;   //($n1-$n2)/(($n1+$n2)/2)
 ;}
 
 $totales=[entries(<<<EOL

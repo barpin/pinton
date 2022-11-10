@@ -71,9 +71,9 @@ npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
           </div>
           <div style="" class="rowcont" id="masdatos">
           <span>Total</span>
-            <div style="display:flex;color:red;align-items:flex-end;"><span>100$</span><span style="font-size:0.7rem;white-space:nowrap;">▼ 15%</span></div>
+            <div style="display:flex;color:red;align-items:flex-end;" id="totalventas"><span>100$</span><span style="font-size:0.7rem;white-space:nowrap;">▼ 15%</span></div>
             <span>C. Ventas</span>
-            <div style="display:flex;color:green;align-items:flex-end;"><span>10$</span><span style="font-size:0.7rem;white-space:nowrap;">▲ 30%</span></div>
+            <div style="display:flex;color:green;align-items:flex-end;" id="cantventas"><span>10$</span><span style="font-size:0.7rem;white-space:nowrap;">▲ 30%</span></div>
             <span>% Mesas</span>
             <div style="display:flex;color:gray;align-items:flex-end;"><span>50%</span><span style="font-size:0.7rem;white-space:nowrap;">■ 0%</span></div>
           </div>

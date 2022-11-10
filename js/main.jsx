@@ -49,13 +49,14 @@ const pages = {
                 })
             }/>);
             for (let x=0;x<donuts.length;x++){
+                if (x+1<apiresponse[1].length )
                 donuts[x].render(<DataPies value={
                     apiresponse[1][x+1].map(x=>{
                         return {name:x["name"], value:Number(x["count"])}
                     })
                 } />)
             }
-
+            if (apiresponse[1].length )
             bigdonut.render(<BigDataPies value={
                 apiresponse[1][0].map(x=>{
                     return {name:x["name"], value:Number(x["count"])}
@@ -71,6 +72,28 @@ const pages = {
 
             //document.querySelector("#date-select").addEventListener('change', updateVistaGeneral(), false);
 
+            let ventas=document.querySelector("#totalventas");
+            let nventas=document.querySelector("#cantventas");
+      
+      
+            ventas.childNodes[0].innerHTML="$"+apiresponse[2]["total"][0];
+            ventas.childNodes[1].innerHTML=(apiresponse[2]["total"][1]>0 ? "▲":"▼")+Math.round(apiresponse[2]["total"][1])+"%";
+            ventas.style.color=apiresponse[2]["total"][1]>0 ? "green":"red";
+      
+            nventas.childNodes[0].innerHTML=+apiresponse[2]["cantidad"][0];
+            nventas.childNodes[1].innerHTML=(apiresponse[2]["cantidad"][1]>0 ? "▲":"▼")+Math.round(apiresponse[2]["cantidad"][1])+"%";
+            nventas.style.color=apiresponse[2]["cantidad"][1]>0 ? "green":"red";
+
+            let recientes = document.querySelector("#compras_recientes_content");
+            apiresponse[4].forEach(element => {
+                childnode = document.createElement("div");
+                childnode.classList.add("colcont");
+
+                recientes?.appendChild(
+                    childnode
+                );
+                console.log(element);
+            });
 
 
             return 1;
