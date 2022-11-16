@@ -27,6 +27,7 @@ const pages = {
       if (!document.querySelector('#graficolinea').firstElementChild) {
         flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
         donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x => ReactDOM.createRoot(x));
+        //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>gengraph(x));
         //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>new ApexCharts(x, {chart: {id: `donutChart${x}`}}));
         stonks = document.querySelectorAll('.stockinfo');
         stockgraphs = Array.prototype.map.call(stonks, x => ReactDOM.createRoot(x.children[0]));
@@ -150,7 +151,8 @@ const pages = {
       console.log(error);
       return 0;
     });
-  }
+  },
+  'productos': (fecha = "hoy") => {}
 };
 function getpage(pagename) {
   console.log(pagename);

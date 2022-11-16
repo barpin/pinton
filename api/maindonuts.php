@@ -39,6 +39,7 @@ $arraydonuts[]=entries(<<<EOL
   EOL);
 
 //productos x cat mas popular
+if (isset($arraydonuts[0][0])){
 $arraydonuts[]=entries(<<<EOL
   SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
   INNER JOIN productos ON productos.ID = productoID  
@@ -47,6 +48,9 @@ $arraydonuts[]=entries(<<<EOL
   GROUP BY productoID
   ORDER BY count DESC
   EOL);
+} else {
+  $arraydonuts[]=[];
+}
 
 //bebidas
 $arraydonuts[]=entries(<<<EOL

@@ -35,9 +35,13 @@ if (!isset($_SESSION["id"])){
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>    <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
     <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
-    <script src="js/apexcharts.js"></script>
+    
+    <!--<script src="js/apexcharts.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.36.3/apexcharts.min.css" integrity="sha512-tJYqW5NWrT0JEkWYxrI4IK2jvT7PAiOwElIGTjALSyr8ZrilUQf+gjw2z6woWGSZqeXASyBXUr+WbtqiQgxUYg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+-->
+<script src="https://d3js.org/d3.v6.min.js"></script>    
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     
     <script> var exports = {}; </script>
 

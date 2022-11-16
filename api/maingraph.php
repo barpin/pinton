@@ -16,7 +16,7 @@ authenticate();
 $dates=[
   "hoy"=>["ROUND(EXTRACT(HOUR FROM fecha_y_hora)*5, -1)/5", "DATE(now())", "DATE_ADD(DATE(now()), INTERVAL 1 DAY) "],
   "ayer"=>["ROUND(EXTRACT(HOUR FROM fecha_y_hora)*5, -1)/5", "DATE_ADD(DATE(now()), INTERVAL -1 DAY)", "DATE(NOW())"],
-  "semana"=>["EXTRACT(DAY FROM fecha_y_hora)", "DATE_ADD(DATE(now()), INTERVAL -7 DAY)", "NOW()"],
+  "semana"=>["UNIX_TIMESTAMP(DATE(fecha_y_hora))", "DATE_ADD(DATE(now()), INTERVAL -7 DAY)", "NOW()"],
   "mes"=>["ROUND(EXTRACT(DAY FROM fecha_y_hora)*(10.0/3.0), -1)/(10.0/3.0)", "DATE_ADD(DATE(now()), INTERVAL -30 DAY)", "NOW()"],
   "todo"=>["TODO","2000-01-01 01:00:00","NOW()"],
   "rango"=>["TODO","",""]
@@ -36,6 +36,15 @@ for ($x=0;$x<count($arrayfechas);$x++){
         //$x++;
       }
       break;
+    case "semana":
+      $arrayfechas[$x]["fecha_grupo"]=date('D', $arrayfechas[$x]["fecha_grupo"]);
+      break; 
+    case "mes":
+      $interval=30-intval($arrayfechas[$x]["fecha_grupo"]);
+      $cdate = new DateTime();
+      $cdate->setTime(0,0,0,0)->sub(new DateInterval("P${interval}D"));
+      $arrayfechas[$x]["fecha_grupo"]=date('D', $cdate);
+      break; 
   }
 }
 
