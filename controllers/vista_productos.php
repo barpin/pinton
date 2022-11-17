@@ -28,7 +28,7 @@ if(intval(entries("SELECT (perms & 4)!=4 FROM users WHERE id = ${_SESSION["id"]}
     
     
       <div style="overflow:auto;" class="rowcont overflow-auto" id='lista_productos'>
-        <span>Prouctos</span>
+        <h2>Productos</h2>
         <table style="width:100%;display:block;" class="" id='compras_recientes_content'>
         
         </table>

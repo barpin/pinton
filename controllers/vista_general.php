@@ -71,7 +71,7 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
         
         <div style="width:100%;height:max(30vh, 100%)" class="colcont">
           <div id="graficolinea">
-            a
+            Cargando....
           </div>
           <div style="" class="rowcont" id="masdatos">
           <span>Total</span>
@@ -88,11 +88,11 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
         <div style="width:100%;align-content:space-around;" class="colcont" id='donutrow1'>
         <div class="donut1" style="height:100%;">
           <span style="position:absolute;">Ventas Por Categorias</span>
-          <div class="donut" id='donut1' style="width:100%;height:100%;">dpnut3</div>
+          <div class="donut" id='donut1' style="width:100%;height:100%;">Cargando....</div>
         </div>
         <div class="donut1"  style="height:100%;">
           <span style="position:absolute;">Ventas Por Producto</span>
-          <div class="donut" id='donut2'  style="width:100%;height:100%;">donut4</div>
+          <div class="donut" id='donut2'  style="width:100%;height:100%;">Cargando....</div>
         </div>
         
         
@@ -101,11 +101,11 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
           
         <div class="donut1"  style="height:100%;">
           <span style="position:absolute;">Mayor categoria Por Producto</span>
-          <div class="donut" id='donut3'  style="width:100%;height:100%;">dpnut3</div>
+          <div class="donut" id='donut3'  style="width:100%;height:100%;">Cargando....</div>
         </div>
         <div class="donut1"  style="height:100%;">
           <span style="position:absolute;">Bebidas</span>
-          <div class="donut" id='donut4'  style="width:100%;height:100%;">donut4</div>
+          <div class="donut" id='donut4'  style="width:100%;height:100%;">Cargando....</div>
         </div>
         
         </div>
@@ -205,7 +205,7 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
       <div style="max-height:35vh;overflow:auto;width:100%" class="rowcont overflow-auto" id='compras_recientes'>
         <span>Compras recientes</span>
         <table style="width:100%;display:block;" class="" id='compras_recientes_content'>
-        
+        Cargando....
         </table>
       </div>
     </div>

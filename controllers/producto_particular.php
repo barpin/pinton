@@ -47,7 +47,7 @@ if(intval(entries("SELECT (perms & 16)!=16 FROM users WHERE id = ${_SESSION["id"
   </div>
     
   <div class="rowcont allcontentdiv">
-    
+    <h1>Producto</h1>
         
     <div class="colcont" id='main_donuts'>
       <div class="rowcont" id='maingraph'>
@@ -73,11 +73,7 @@ if(intval(entries("SELECT (perms & 16)!=16 FROM users WHERE id = ${_SESSION["id"
             <div style="display:flex;color:red;align-items:flex-end;" id="totalventas"><span>100$</span><span style="font-size:0.7rem;white-space:nowrap;">▼ 15%</span></div>
             <span>C. Ventas</span>
             <div style="display:flex;color:green;align-items:flex-end;" id="cantventas"><span>10$</span><span style="font-size:0.7rem;white-space:nowrap;">▲ 30%</span></div>
-            <br>
-            <br>
-            <br>
-            <br>
-            a
+            <div style="height:20vh"></div>
           </div>
         </div>
       </div>

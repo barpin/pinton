@@ -98,7 +98,7 @@ if (!isset($_SESSION["id"])){
         <a class="nav-item" href="#" style="float: right;"><img src="./img/u.png" width="50" height="50"></a>
     </div>  
     <div class="" id='content' onload="getpage('vista_general')">
-aaaaaaaaaaaaaaaaaaaaaaaa
+    Cargando....
     </div>
     <div id="footer">
 

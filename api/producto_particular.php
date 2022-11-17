@@ -89,10 +89,10 @@ $totalesyporentajes=[
 ];
 
 $parte3=entries("SELECT ingredientes.*, amount FROM ingredientes INNER JOIN receta ON ingredientes.id=receta.ingredientID WHERE productID=${prodd}");
+$parte4=entries("SELECT name FROM productos WHERE id = $prodd")[0]["name"];
 
 
 
-
-echo(json_encode([$arrayfechas, $totalesyporentajes, $parte3]));
+echo(json_encode([$arrayfechas, $totalesyporentajes, $parte3, $parte4]));
 return $arrayfechas;
 

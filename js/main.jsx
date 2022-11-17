@@ -318,7 +318,7 @@ async function updatePP(producto, fecha='mes'){
     })
     .then((response) => response.text()).then((htmlresponse)=>{
         apiresponse=JSON.parse(htmlresponse);
-        
+        console.log(apiresponse[3]);
         //CREAR ROOTS DE REACT SI NO ESTAN CREADAS
         if (!document.querySelector('#graficolinea').firstElementChild ){
             flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
@@ -385,6 +385,7 @@ async function updatePP(producto, fecha='mes'){
 
         });
         recientes.innerHTML= tmpelstr;
+        document.querySelector('h1').innerHTML=apiresponse[3];
 
 
         return 1;
