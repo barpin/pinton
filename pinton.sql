@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2022 a las 15:56:35
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.2
+-- Tiempo de generación: 17-11-2022 a las 14:18:09
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `pinton`
 --
+CREATE DATABASE IF NOT EXISTS `pinton` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `pinton`;
 
 -- --------------------------------------------------------
 
@@ -151,7 +153,10 @@ INSERT INTO `ingredientes` (`id`, `name`, `unit`, `stock`) VALUES
 (12, 'langostinos', 'kg', 70),
 (13, 'pollo', 'kg', 60),
 (14, 'garbanzo', 'kg', 80),
-(15, 'salchichas', 'kg', 30);
+(15, 'salchichas', 'kg', 30),
+(16, 'ajo', 'gr', 122),
+(17, 'salsa_teriyaki', 'litro', 40),
+(18, 'pan', 'kg', 200);
 
 -- --------------------------------------------------------
 
@@ -171,29 +176,29 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `price`, `categoryID`, `name`) VALUES
-(1, '0.00', 0, 'carne con salsa de tomate'),
-(2, '0.00', 1, 'salchichas ahumadas'),
-(3, '1380.00', 1, 'pollo crispy'),
-(4, '0.00', 1, 'pollo a la chapa'),
+(1, '400.00', 0, 'carne con salsa de tomate'),
+(2, '550.00', 1, 'salchichas ahumadas'),
+(3, '400.00', 1, 'pollo crispy'),
+(4, '550.00', 1, 'pollo a la chapa'),
 (5, '2100.00', 1, 'langostino'),
-(6, '0.00', 1, 'Vegano'),
+(6, '600.00', 1, 'Vegano'),
 (7, '1100.00', 2, 'Papas simples'),
 (8, '1930.00', 2, 'Papas completas'),
-(9, '0.00', 2, 'Papas pinton'),
-(10, '0.00', 2, 'Nachos'),
+(9, '1200.00', 2, 'Papas pinton'),
+(10, '950.00', 2, 'Nachos'),
 (11, '1320.00', 3, 'Mercedes'),
 (12, '1320.00', 3, 'New York'),
-(13, '0.00', 3, 'Lincoln'),
-(14, '0.00', 3, 'Vegetariana'),
-(15, '0.00', 3, 'langostinos'),
-(16, '0.00', 5, 'Birras Artesanales'),
-(17, '0.00', 5, 'Birras Importadas'),
+(13, '1320.00', 3, 'Lincoln'),
+(14, '1400.00', 3, 'Vegetariana'),
+(15, '1300.00', 3, 'langostinos'),
+(16, '1500.00', 5, 'Birras Artesanales'),
+(17, '1500.00', 5, 'Birras Importadas'),
 (18, '700.00', 4, 'Rhode Island'),
 (19, '1850.00', 4, 'Maj-Taj P-49'),
-(20, '0.00', 4, 'Crystal Tangerine'),
-(21, '0.00', 4, 'Cucumber Punch'),
-(22, '0.00', 4, 'Margarita de Maracuyá'),
-(23, '0.00', 4, 'Negroni Pintón'),
+(20, '1300.00', 4, 'Crystal Tangerine'),
+(21, '1400.00', 4, 'Cucumber Punch'),
+(22, '1500.00', 4, 'Margarita de Maracuyá'),
+(23, '1700.00', 4, 'Negroni Pintón'),
 (24, '1200.00', 4, 'Scottish Julep'),
 (25, '320.00', 6, 'Limonada'),
 (26, '0.00', 6, 'Limonada de maracuya'),
@@ -201,7 +206,7 @@ INSERT INTO `productos` (`id`, `price`, `categoryID`, `name`) VALUES
 (28, '0.00', 6, 'Agua'),
 (29, '0.00', 6, 'Agua saborizada'),
 (30, '0.00', 6, 'Gaseosa'),
-(32, '0.00', 0, 'cerdo con salsa Teriyaki');
+(32, '450.00', 0, 'cerdo con salsa Teriyaki');
 
 -- --------------------------------------------------------
 
@@ -233,16 +238,45 @@ CREATE TABLE `receta` (
 --
 
 INSERT INTO `receta` (`productID`, `ingredientID`, `amount`) VALUES
+(0, 0, 0),
 (1, 2, 1050),
+(1, 3, 2),
+(1, 4, 2),
 (2, 15, 200),
 (3, 14, 4836),
 (4, 14, 2800),
+(6, 4, 1),
+(6, 6, 0.5),
+(6, 11, 0.25),
+(6, 17, 0.5),
 (7, 5, 300),
 (8, 5, 980),
 (9, 5, 350),
+(11, 1, 1),
+(11, 2, 0.5),
+(11, 3, 2),
+(11, 5, 1),
+(11, 18, 1),
+(12, 1, 1),
+(12, 2, 1),
+(12, 3, 1),
+(12, 4, 0.5),
+(12, 5, 1),
+(12, 7, 0.75),
+(12, 10, 1),
+(13, 1, 1),
+(13, 2, 1),
+(13, 5, 1),
+(14, 6, 0.75),
+(14, 11, 11),
 (14, 14, 425),
+(14, 18, 1),
 (15, 12, 439),
-(32, 9, 2000);
+(32, 5, 0.25),
+(32, 9, 2000),
+(32, 11, 0.5),
+(32, 16, 5),
+(32, 17, 1);
 
 -- --------------------------------------------------------
 
@@ -355,7 +389,7 @@ ALTER TABLE `compras`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
