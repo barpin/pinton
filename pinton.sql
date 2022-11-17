@@ -70,7 +70,7 @@ INSERT INTO `categories` (`id`, `name`, `urlname`, `parents`, `disabled_at`) VAL
 (1, 'Principal', NULL, 1, NULL),
 (2, 'Productos', NULL, 1, NULL),
 (3, 'Ingredientes', NULL, 1, NULL),
-(4, 'Producto Particular', NULL, 1, NULL),
+(4, 'Producto Particular', NULL, 1, NULL);
 
 
 -- --------------------------------------------------------
