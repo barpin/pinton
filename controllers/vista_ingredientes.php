@@ -6,7 +6,7 @@ require p.'assets/database.php';
 /*
 
 */
-if(intval(entries("SELECT (perms & 4)!=4 FROM users WHERE id = ${_SESSION["id"]}", true)[0][0])){
+if(intval(entries("SELECT (perms & 8)!=8 FROM users WHERE id = ${_SESSION["id"]}", true)[0][0])){
   ?>
   <div style="width:100%;height:auto;text-align:center;align-items:center;font-size:3rem;color:darkgray;" class="colcont">No tienes permiso para acceder a este recurso.</div>
 <?php

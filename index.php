@@ -96,7 +96,7 @@ if (!isset($_SESSION["id"])){
         <!--<a class="nav-item" href="#" >Ventas</a>
         <a class="nav-item" href="#" >Stock</a>
         <a class="nav-item" href="#" >Clientes  </a> -->
-        <a class="nav-item" href="#" ><div class="w3-right-align">User</div></a>
+        <a class="nav-item" href="#" ><div class="w3-right-align" onclick="getpage('vista_usuario')">User</div></a>
         <a class="nav-item" href="#" style="float: right;"><img src="./img/u.png" width="50" height="50"></a>
     </div>  
     <div class="" id='content' onload="getpage('vista_general')">

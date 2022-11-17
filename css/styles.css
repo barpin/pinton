@@ -133,6 +133,7 @@ html{overflow-y:scroll}
 	width:100%;
 	aspect-ratio: 1/1;
 }
+
 #donutrow1, #donutrow2 {
 	height:100%;
 	align-items:center;
@@ -153,7 +154,7 @@ html{overflow-y:scroll}
 }
 }
 
-  .donut{
+  .donut, .donut1{
     width:50%;
     aspect-ratio: 1/1;
   }

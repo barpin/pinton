@@ -28,7 +28,7 @@ PowerShell.exe -NoProfile
 Set-ExecutionPolicy -ExecutionPolicy Bypass
 npx babel --presets @babel/preset-react --watch ./main.jsx -o ./main.js
 */
-if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}", true)[0][0])){
+if(intval(entries("SELECT (perms & 16)!=16 FROM users WHERE id = ${_SESSION["id"]}", true)[0][0])){
   ?>
   <div style="width:100%;height:auto;text-align:center;align-items:center;font-size:3rem;color:darkgray;" class="colcont">No tienes permiso para acceder a este recurso.</div>
 <?php

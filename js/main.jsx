@@ -268,12 +268,8 @@ const pages = {
 
 
 
-    'producto_particular': (producto=0, fecha="mes")=>{  ///////////VISTA GENERAL//////////////////////////
-
-
-
-        
-    }
+    'producto_particular': (producto=0, fecha="mes")=>{},
+    'vista_usuario': (producto=0, fecha="mes")=>{},
 
 
 

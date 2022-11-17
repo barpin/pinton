@@ -1,13 +1,12 @@
 //import React from "react";
 //import { PureComponent } from "react";
 //import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-const e = React.createElement; //var ptrigcount=0;
-
+const e = React.createElement;
+//var ptrigcount=0;
 function p(input) {
   console.log(input);
   return input;
 }
-
 var flinea;
 var donuts;
 var stonks;
@@ -17,25 +16,28 @@ console.log('working');
 const pages = {
   'vista_general': (fecha = "hoy") => {
     ///////////VISTA GENERAL//////////////////////////
+
     fetch("./api/vista_general.php?rango=" + fecha, {
       method: "GET",
       credentials: 'same-origin',
       mode: 'same-origin',
       cache: 'no-cache'
     }).then(response => response.text()).then(htmlresponse => {
-      apiresponse = JSON.parse(htmlresponse); //CREAR ROOTS DE REACT SI NO ESTAN CREADAS
+      apiresponse = JSON.parse(htmlresponse);
 
+      //CREAR ROOTS DE REACT SI NO ESTAN CREADAS
       if (!document.querySelector('#graficolinea').firstElementChild) {
         flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
-        donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x => ReactDOM.createRoot(x)); //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>gengraph(x));
+        donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x => ReactDOM.createRoot(x));
+        //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>gengraph(x));
         //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>new ApexCharts(x, {chart: {id: `donutChart${x}`}}));
-
         stonks = document.querySelectorAll('.stockinfo');
         stockgraphs = Array.prototype.map.call(stonks, x => ReactDOM.createRoot(x.children[0]));
-      } //console.log(donuts);
+      }
+
+      //console.log(donuts);
+
       //ARMAR GRAFICO DE LINEA PRINCIPAL
-
-
       flinea.render( /*#__PURE__*/React.createElement(Linechart, {
         value: apiresponse[0].map(x => {
           return {
@@ -44,7 +46,8 @@ const pages = {
           };
         })
       }));
-      donutdata = apiresponse[1]; //ARMAR GRAFICOS DE DONAS
+      donutdata = apiresponse[1];
+      //ARMAR GRAFICOS DE DONAS
 
       for (let x = 0; x < donuts.length; x++) {
         donuts[x].render( /*#__PURE__*/React.createElement(DataPies, {
@@ -62,8 +65,6 @@ const pages = {
       }
       */
       //ARMAR GRAFICOS DE STOCK
-
-
       for (let x = 0; x < stockgraphs.length; x++) {
         stockgraphs[x].render( /*#__PURE__*/React.createElement(Stockchart, {
           value: [{
@@ -103,10 +104,11 @@ const pages = {
             amt: 2100
           }]
         }));
-      } //document.querySelector("#date-select").addEventListener('change', updateVistaGeneral(), false);
+      }
+
+      //document.querySelector("#date-select").addEventListener('change', updateVistaGeneral(), false);
+
       //ARMAR DATOS DE COMPTA
-
-
       let ventas = document.querySelector("#totalventas");
       let nventas = document.querySelector("#cantventas");
       ventas.childNodes[0].innerHTML = "$" + apiresponse[2]["total"][0];
@@ -114,8 +116,9 @@ const pages = {
       ventas.style.color = apiresponse[2]["total"][1] > 0 ? "green" : "red";
       nventas.childNodes[0].innerHTML = +apiresponse[2]["cantidad"][0];
       nventas.childNodes[1].innerHTML = (apiresponse[2]["cantidad"][1] > 0 ? "▲" : "▼") + Math.round(apiresponse[2]["cantidad"][1]) + "%";
-      nventas.style.color = apiresponse[2]["cantidad"][1] > 0 ? "green" : "red"; //ARMAR COMPRAS RECIENTES
+      nventas.style.color = apiresponse[2]["cantidad"][1] > 0 ? "green" : "red";
 
+      //ARMAR COMPRAS RECIENTES
       let recientes = document.querySelector("#compras_recientes_content");
       let tmpelstr = "";
       apiresponse[4].forEach(element => {
@@ -134,6 +137,7 @@ const pages = {
                 
                 </tr>
                 `;
+
         /*
         childnode = document.createElement("div");
         childnode.classList.add("colcont");
@@ -142,6 +146,7 @@ const pages = {
         );
         console.log(element);*/
       });
+
       recientes.innerHTML = tmpelstr;
       return 1;
     }).catch(error => {
@@ -151,6 +156,7 @@ const pages = {
   },
   'vista_productos': (filter = "none") => {
     //////////////////////////////////////////PRODUCTOS///////////////////////////////
+
     fetch("./api/vista_productos.php?filter=" + filter, {
       method: "GET",
       credentials: 'same-origin',
@@ -204,6 +210,7 @@ const pages = {
   },
   'vista_ingredientes': () => {
     //////////////////////////////////////////PRODUCTOS///////////////////////////////
+
     fetch("./api/vista_ingredientes.php", {
       method: "GET",
       credentials: 'same-origin',
@@ -249,10 +256,9 @@ const pages = {
       return 0;
     });
   },
-  'producto_particular': (producto = 0, fecha = "mes") => {///////////VISTA GENERAL//////////////////////////
-  }
+  'producto_particular': (producto = 0, fecha = "mes") => {},
+  'vista_usuario': (producto = 0, fecha = "mes") => {}
 };
-
 function getpage(pagename) {
   console.log(pagename);
   fetch("./controllers/" + pagename + '.php', {
@@ -268,26 +274,20 @@ function getpage(pagename) {
     return 0;
   });
 }
-
 function getRandomColor() {
   //TODO: better colors
   var letters = '0123456789ABCDEF';
   var color = '#';
-
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
-
   return color;
 }
-
 async function updatePP(producto, fecha = 'mes') {
   var dselele = document.getElementById("date-select");
-
   if (dselele) {
     fecha = dselele.value;
   }
-
   console.log(dselele);
   getpage('producto_particular');
   fetch(`./api/producto_particular.php?producto=${producto}&rango=` + fecha, {
@@ -296,19 +296,21 @@ async function updatePP(producto, fecha = 'mes') {
     mode: 'same-origin',
     cache: 'no-cache'
   }).then(response => response.text()).then(htmlresponse => {
-    apiresponse = JSON.parse(htmlresponse); //CREAR ROOTS DE REACT SI NO ESTAN CREADAS
+    apiresponse = JSON.parse(htmlresponse);
 
+    //CREAR ROOTS DE REACT SI NO ESTAN CREADAS
     if (!document.querySelector('#graficolinea').firstElementChild) {
       flinea = ReactDOM.createRoot(document.querySelector('#graficolinea'));
-      donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x => ReactDOM.createRoot(x)); //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>gengraph(x));
+      donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x => ReactDOM.createRoot(x));
+      //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>gengraph(x));
       //donuts = Array.prototype.map.call(document.querySelectorAll('.donut'), x=>new ApexCharts(x, {chart: {id: `donutChart${x}`}}));
-
       stonks = document.querySelectorAll('.stockinfo');
       stockgraphs = Array.prototype.map.call(stonks, x => ReactDOM.createRoot(x.children[0]));
-    } //console.log(donuts);
+    }
+
+    //console.log(donuts);
+
     //ARMAR GRAFICO DE LINEA PRINCIPAL
-
-
     flinea.render( /*#__PURE__*/React.createElement(Linechart, {
       value: apiresponse[0].map(x => {
         return {
@@ -317,6 +319,7 @@ async function updatePP(producto, fecha = 'mes') {
         };
       })
     }));
+
     /*
     //ARMAR GRAFICOS DE STOCK
     for (let x=0;x<stockgraphs.length;x++){
@@ -324,8 +327,8 @@ async function updatePP(producto, fecha = 'mes') {
             [{name: 'Page A',uv: 4000,pv: 2400,amt: 2400,},{name: 'Page B',uv: 3000,pv: 1398,amt: 2210,},{name: 'Page C',uv: 2000,pv: 9800,amt: 2290,},{name: 'Page D',uv: 2780,pv: 3908,amt: 2000,},{name: 'Page E',uv: 1890,pv: 4800,amt: 2181,},{name: 'Page F',uv: 2390,pv: 3800,amt: 2500,},{name: 'Page G',uv: 3490,pv: 4300,amt: 2100,},]
         }/>)
     }*/
-    //ARMAR DATOS DE COMPTA
 
+    //ARMAR DATOS DE COMPTA
     let ventas = document.querySelector("#totalventas");
     let nventas = document.querySelector("#cantventas");
     ventas.childNodes[0].innerHTML = "$" + apiresponse[1]["total"][0];
@@ -359,14 +362,16 @@ async function updatePP(producto, fecha = 'mes') {
   }).catch(error => {
     console.log(error);
     return 0;
-  }); //}
+  });
+  //}
   //
 }
 
 function updateVistaGeneral() {
   pages['vista_general'](document.querySelector("#date-select").value);
-} //----------------------------------Main Page stuff------------------------------------
+}
 
+//----------------------------------Main Page stuff------------------------------------
 
 class DataPies extends React.PureComponent {
   render() {
@@ -394,9 +399,7 @@ class DataPies extends React.PureComponent {
       iconSize: "8px"
     })));
   }
-
 }
-
 class Linechart extends React.PureComponent {
   render() {
     return /*#__PURE__*/React.createElement(Recharts.ResponsiveContainer, {
@@ -408,9 +411,9 @@ class Linechart extends React.PureComponent {
       data: this.props.value,
       margin: {
         //    top: 5,
-        right: 30 //    left: 20,
+        right: 30
+        //    left: 20,
         //    bottom: 5,
-
       }
     }, /*#__PURE__*/React.createElement(Recharts.CartesianGrid, {
       strokeDasharray: "3 3"
@@ -425,9 +428,8 @@ class Linechart extends React.PureComponent {
       }
     })));
   }
-
-} //<Recharts.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-
+}
+//<Recharts.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
 
 class Stockchart extends React.PureComponent {
   render() {
@@ -443,8 +445,8 @@ class Stockchart extends React.PureComponent {
       dot: ""
     })));
   }
-
 }
+
 /*
 function mainpage(){
     var a=getpage('vista_general');
@@ -455,6 +457,5 @@ function mainpage(){
 
 
 mainpage()*/
-
 
 getpage('vista_general');

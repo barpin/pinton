@@ -54,11 +54,11 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
         
           <span>
             Todas 
-            las 
+            las ventas<!--
             <select name="dog-names" id="dog-names">
               <option value="hoy" default>ventas</option>
               <option value="ayer">reabastecimientos</option>
-            </select>
+            </select> -->
             <select name="date-select" id="date-select" onchange="updateVistaGeneral()">
               <option value="hoy" default>hoy</option>
               <option value="ayer">ayer</option>
@@ -83,17 +83,37 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
           </div>
         </div>
       </div>
-      <div style="" class="rowcont" id='donuts'>
+      <div style="height:600px" class="rowcont" id='donuts'>
 
-        <div style="width:100%;align-content:space-around" class="colcont" id='donutrow1'>
-        <div class="donut" id='donut1'>dpnut3</div><div class="donut" id='donut2'>donut4</div>
+        <div style="width:100%;align-content:space-around;" class="colcont" id='donutrow1'>
+        <div class="donut1" style="height:100%;">
+          <span style="position:absolute;">Ventas Por Categorias</span>
+          <div class="donut" id='donut1' style="width:100%;height:100%;">dpnut3</div>
+        </div>
+        <div class="donut1"  style="height:100%;">
+          <span style="position:absolute;">Ventas Por Producto</span>
+          <div class="donut" id='donut2'  style="width:100%;height:100%;">donut4</div>
+        </div>
+        
+        
         </div>
         <div style="width:100%;align-content:space-around" class="colcont" id="donutrow2">
-          <div class="donut" id='donut2'>dpnut3</div><div class="donut" id='donut4'>donut4</div>
+          
+        <div class="donut1"  style="height:100%;">
+          <span style="position:absolute;">Mayor categoria Por Producto</span>
+          <div class="donut" id='donut3'  style="width:100%;height:100%;">dpnut3</div>
+        </div>
+        <div class="donut1"  style="height:100%;">
+          <span style="position:absolute;">Bebidas</span>
+          <div class="donut" id='donut4'  style="width:100%;height:100%;">donut4</div>
+        </div>
+        
         </div>
       </div>
     </div>
+
     <div class="colcont" id='data_recent'>
+    <!--
       <div style="" class="rowcont" id='numberdetails'>
         
         <span>Medio de Pago</span>
@@ -181,7 +201,8 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
           </div>
         </div>  
       </div>
-      <div style="max-height:35vh;overflow:auto;" class="rowcont overflow-auto" id='compras_recientes'>
+-->
+      <div style="max-height:35vh;overflow:auto;width:100%" class="rowcont overflow-auto" id='compras_recientes'>
         <span>Compras recientes</span>
         <table style="width:100%;display:block;" class="" id='compras_recientes_content'>
         
