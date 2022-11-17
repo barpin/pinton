@@ -150,7 +150,15 @@ const pages = {
             
 
             let recientes = document.querySelector("#compras_recientes_content");
-            let tmpelstr="";
+            let tmpelstr=`<tr class="" style="width:100%;">
+            <th class="receientescell" style="">Nombre</th>
+            <th class="receientescell" style="">Precio</th>
+            <th class="receientescell" style="">Precio</th>
+            <th class="receientescell" style="">n. de Ventas</th>
+            <th class="receientescell" style="">Monto de Ventas</th>
+            <th class="receientescell" style=""></th>
+
+        </tr>`;
             apiresponse[0].forEach(element => {
                 tmpelstr+=`
                 <tr class="" style="width:100%;">
@@ -174,6 +182,67 @@ const pages = {
                     <td>
                     <button type="button" class="btn btn-primary" style="display:inline;" onclick="updatePP(${element["id"]})">Ver Mas</button>
                     </td>
+                
+                </tr>
+                `
+                
+
+            });
+            recientes.innerHTML= tmpelstr;
+            
+
+            return 1;
+        
+
+            
+
+        }).catch((error) => {
+            console.log(error);
+            return 0;
+        });
+
+
+    },
+
+    'vista_ingredientes': ()=>{ //////////////////////////////////////////PRODUCTOS///////////////////////////////
+
+        fetch("./api/vista_ingredientes.php", {
+            method:"GET",
+            credentials: 'same-origin', 
+            mode: 'same-origin',
+            cache: 'no-cache',
+        })
+        .then((response) => response.text()).then((htmlresponse)=>{
+            apiresponse=JSON.parse(htmlresponse);
+            
+
+            let recientes = document.querySelector("#compras_recientes_content");
+            let tmpelstr=`<tr class="" style="width:100%;">
+            <th class="receientescell" style=";">id</th>                
+            <th class="receientescell" style=";">name</th>                
+            <th class="receientescell" style=";">stock</th>                
+            <th class="receientescell" style=";">veces usado</th>                
+           
+
+        
+        </tr>`;
+            apiresponse.forEach(element => {
+                tmpelstr+=`
+                <tr class="" style="width:100%;">
+                    <td class="receientescell" style="color:green;">
+                        ${element["id"]} 
+                    </td>                
+                    <td class="receientescell" style="">
+                        <span>${element["name"]}</span><br>
+                    </td>
+
+                    <td class="receientescell" style="color:green;">
+                         ${element["stock"]} ${element["unit"]}
+                    </td>
+                    <td class="receientescell" style="color:green;">
+                         ${element["totalunidades"]==null ?0:element["totalunidades"] }
+                    </td>
+
                 
                 </tr>
                 `

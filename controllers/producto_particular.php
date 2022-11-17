@@ -80,7 +80,7 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
           </div>
         </div>
       </div>
-      <div style="" class="rowcont" id='ingredientes'>
+      <div style="width:50%" class="rowcont" id='ingredientes'>
         <span>Ingredientes</span>
         <table style="width:100%;display:block;" class="" id='compras_recientes_content'>
         

@@ -24,32 +24,90 @@ $dates=[
 
 //vantas x categoria
 $arraydonuts=[entries(<<<EOL
-    SELECT max(categorias_productos.ID) as id, categorias_productos.name, count(categorias_productos.name) as count FROM compras 
-    INNER JOIN productos ON compras.productoID=productos.ID 
-    INNER JOIN categorias_productos ON productos.categoryID=categorias_productos.ID
-    WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]} 
-    GROUP BY categorias_productos.name
-    ORDER BY count DESC
+    (
+      SELECT max(categorias_productos.ID) as id, categorias_productos.name, count(categorias_productos.name) as count FROM compras 
+      INNER JOIN productos ON compras.productoID=productos.ID 
+      INNER JOIN categorias_productos ON productos.categoryID=categorias_productos.ID
+      WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]} 
+      GROUP BY categorias_productos.name
+      ORDER BY count DESC
+      LIMIT 0,5
+    ) UNION (
+      SELECT 999 as id, "Otras" as name, count(categorias_productos.name) as count FROM compras 
+      INNER JOIN productos ON compras.productoID=productos.ID 
+      INNER JOIN categorias_productos ON productos.categoryID=categorias_productos.ID
+      WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]} 
+      AND NOT categorias_productos.ID IN 
+        (
+          SELECT id FROM(
+            SELECT max(categorias_productos.ID) as id, categorias_productos.name, count(categorias_productos.name) as count FROM compras 
+            INNER JOIN productos ON compras.productoID=productos.ID 
+            INNER JOIN categorias_productos ON productos.categoryID=categorias_productos.ID
+            WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]} 
+            GROUP BY categorias_productos.name
+            ORDER BY count DESC
+            LIMIT 0,5
+          ) AS lim 
+        )
+    )
     EOL)];
 
 //ventas x producto
 $arraydonuts[]=entries(<<<EOL
-  SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
-  INNER JOIN productos ON productos.ID = productoID  
-  WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
-  GROUP BY productoID
-  ORDER BY count DESC
+  (
+    SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+    INNER JOIN productos ON productos.ID = productoID  
+    WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+    GROUP BY productoID
+    ORDER BY count DESC
+    LIMIT 0,5
+  ) UNION (
+    SELECT 999 AS productoID, "Otras" as name, count(productos.name) as count FROM compras 
+    INNER JOIN productos ON productos.ID = productoID  
+    WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+    AND NOT productoID IN 
+      (
+        SELECT productoID FROM(
+          SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+          INNER JOIN productos ON productos.ID = productoID  
+          WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+          GROUP BY productoID
+          ORDER BY count DESC
+          LIMIT 0,5
+        ) AS lim 
+      )
+  )
   EOL);
 
 //productos x cat mas popular
 if (isset($arraydonuts[0][0])){
 $arraydonuts[]=entries(<<<EOL
-  SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
-  INNER JOIN productos ON productos.ID = productoID  
-  WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
-  AND categoryID={$arraydonuts[0][0]['id']}
-  GROUP BY productoID
-  ORDER BY count DESC
+  (
+    SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+    INNER JOIN productos ON productos.ID = productoID  
+    WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+    AND categoryID={$arraydonuts[0][0]['id']}
+    GROUP BY productoID
+    ORDER BY count DESC
+    LIMIT 0,5
+  ) UNION (
+    SELECT 999 as productoID, "Otros" as name, count(productos.name) as count FROM compras 
+    INNER JOIN productos ON productos.ID = productoID  
+    WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+    AND categoryID={$arraydonuts[0][0]['id']}
+    AND NOT productoID IN 
+      (
+        SELECT productoID FROM(
+        SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+        INNER JOIN productos ON productos.ID = productoID  
+        WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+        AND categoryID={$arraydonuts[0][0]['id']}
+        GROUP BY productoID
+        ORDER BY count DESC
+        LIMIT 0,5
+        ) AS lim 
+      )
+  )
   EOL);
 } else {
   $arraydonuts[]=[];
@@ -57,12 +115,32 @@ $arraydonuts[]=entries(<<<EOL
 
 //bebidas
 $arraydonuts[]=entries(<<<EOL
-  SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
-  INNER JOIN productos ON productos.ID = productoID  
-  WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
-  AND categoryID>3
-  GROUP BY productoID
-  ORDER BY count DESC
+  (
+    SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+    INNER JOIN productos ON productos.ID = productoID  
+    WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+    AND categoryID>3
+    GROUP BY productoID
+    ORDER BY count DESC
+    LIMIT 0,5
+  ) UNION (
+    SELECT 999 as productoID, "Otros" as name, count(productos.name) as count FROM compras 
+    INNER JOIN productos ON productos.ID = productoID  
+    WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+    AND categoryID>3
+    AND NOT productoID IN 
+      (
+        SELECT productoID FROM(
+          SELECT productoID, max(productos.name) as name, count(productos.name) as count FROM compras 
+          INNER JOIN productos ON productos.ID = productoID  
+          WHERE fecha_y_hora > {$dates[$range][0]} AND fecha_y_hora < {$dates[$range][1]}  
+          AND categoryID>3
+          GROUP BY productoID
+          ORDER BY count DESC
+          LIMIT 0,5
+        ) AS lim 
+      ) 
+  )
   EOL);
 
 echo(json_encode($arraydonuts));

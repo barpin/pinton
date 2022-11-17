@@ -22,6 +22,7 @@ if (!isset($_SESSION["id"])){
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="icon" href="./img/juan.png">
 
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -30,13 +31,23 @@ if (!isset($_SESSION["id"])){
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet"> 
     
 
+
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>    <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
     <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
-    
-    <!--<script src="js/apexcharts.js"></script>
+
+<!--
+    <link rel="stylesheet" href="cdn/bootstrap.min.css">
+    <link rel="stylesheet" href="cdn/all.css">
+    <script src="cdn/bootstrap.min.js"></script>
+    <script src="cdn/jquery.min.js"></script>
+    <script src="cdn/react.development.js"></script>
+    <script src="cdn/react-dom.development.js"></script>
+    <script src="cdn/Recharts.js"></script>
+
+    <script src="js/apexcharts.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.36.3/apexcharts.min.css" integrity="sha512-tJYqW5NWrT0JEkWYxrI4IK2jvT7PAiOwElIGTjALSyr8ZrilUQf+gjw2z6woWGSZqeXASyBXUr+WbtqiQgxUYg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 -->
 <script src="https://d3js.org/d3.v6.min.js"></script>    
@@ -81,6 +92,7 @@ if (!isset($_SESSION["id"])){
         <a class="nav-item" href="#" style="float: left;"><img src="./img/bar logo.png" width="50" height="50"></a>
         <a class="nav-item" onclick="getpage('vista_general')" href="#" >Vista General</a>
         <a class="nav-item" onclick="getpage('vista_productos')" href="#">Productos</a>
+        <a class="nav-item" onclick="getpage('vista_ingredientes')" href="#">Ingredientes</a>
         <!--<a class="nav-item" href="#" >Ventas</a>
         <a class="nav-item" href="#" >Stock</a>
         <a class="nav-item" href="#" >Clientes  </a> -->
