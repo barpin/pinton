@@ -28,13 +28,13 @@ $dates=[
   "ayer"=>["ROUND(EXTRACT(HOUR FROM fecha_y_hora)*5, -1)/5", "DATE_ADD(DATE(now()), INTERVAL -1 DAY)", "DATE(NOW())"],
   "semana"=>["UNIX_TIMESTAMP(DATE(fecha_y_hora))", "DATE_ADD(DATE(now()), INTERVAL -7 DAY)", "NOW()"],
   "mes"=>["ROUND(EXTRACT(DAY FROM fecha_y_hora)*(10.0/3.0), -1)/(10.0/3.0)", "DATE_ADD(DATE(now()), INTERVAL -30 DAY)", "NOW()"],
-  "todo"=>["ROUND((UNIX_TIMESTAMP(fecha_y_hora)/60/60/24 - (SELECT UNIQUE UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras))/(SELECT UNIQUE ROUND(UNIX_TIMESTAMP(NOW())/60/60/24-(SELECT UNIQUE UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras) ,0)  FROM compras), 1)*(SELECT UNIQUE ROUND(UNIX_TIMESTAMP(NOW())/60/60/24-(SELECT UNIQUE UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras) ,0)  FROM compras)",
+  "todo"=>["ROUND((UNIX_TIMESTAMP(fecha_y_hora)/60/60/24 - (SELECT UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras))/(SELECT ROUND(UNIX_TIMESTAMP(NOW())/60/60/24-(SELECT UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras) ,0) as aaa  FROM compras group by aaa), 1)*(SELECT ROUND(UNIX_TIMESTAMP(NOW())/60/60/24-(SELECT UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras) ,0) as aaa  FROM compras group by aaa)",
     "FROM_UNIXTIME(0)","NOW()"],
   "rango"=>["TODO","",""]
 ];
 
 //echo "SELECT {$dates[$rango][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$rango][1]} AND fecha_y_hora < {$dates[$rango][2]} GROUP BY fecha_grupo ";
-//error_log("SELECT {$dates[$range][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$range][1]} AND fecha_y_hora < {$dates[$range][2]} GROUP BY fecha_grupo ");
+error_log("SELECT {$dates[$range][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$range][1]} AND fecha_y_hora < {$dates[$range][2]} GROUP BY fecha_grupo ");
 $arrayfechas=entries("SELECT {$dates[$range][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$range][1]} AND fecha_y_hora < {$dates[$range][2]} GROUP BY fecha_grupo ");
 
 for ($x=0;$x<count($arrayfechas);$x++){

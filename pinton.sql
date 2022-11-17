@@ -68,28 +68,10 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `urlname`, `parents`, `disabled_at`) VALUES
 (0, 'Todo', NULL, 0, NULL),
 (1, 'Principal', NULL, 1, NULL),
-(2, 'Estatico', NULL, 1, NULL),
-(3, 'Post', NULL, 1, NULL),
-(4, 'Voto', NULL, 1, NULL),
-(5, 'Alerta', NULL, 1, NULL),
-(6, 'Secretarias', NULL, 1, NULL),
-(7, 'Comisiones', NULL, 1, NULL),
-(8, 'Clubes', NULL, 1, NULL),
-(9, 'Eliminados', NULL, 1, NULL),
-(10, 'Admin:Codigos', NULL, 0, NULL),
-(11, 'Admin:Usuarios', NULL, 0, NULL),
-(12, 'Admin:Categorias', NULL, 0, NULL),
-(20, 'Elecciones', NULL, 3, NULL),
-(21, 'Reuniones', NULL, 3, NULL),
-(22, 'Pruebas', NULL, 1, NULL),
-(31, 'Secretaria de asuntos internos', 'internos', 65, NULL),
-(32, 'Secretaria de finanzas', 'finanzas', 65, NULL),
-(33, 'Secretaria de género', 'genero', 65, NULL),
-(34, 'Secretaria de cultura', 'cultura', 65, NULL),
-(35, 'Secretaria de nota y asuntos estudiantiles', 'estudiantiles', 65, NULL),
-(36, 'Secretaria de asuntos edilicios', 'edilicios', 65, NULL),
-(37, 'Secretaria de prensa y difusión', 'prensa', 65, NULL),
-(38, 'Secretaria del turno noche', 'noche', 65, NULL);
+(2, 'Productos', NULL, 1, NULL),
+(3, 'Ingredientes', NULL, 1, NULL),
+(4, 'Producto Particular', NULL, 1, NULL),
+
 
 -- --------------------------------------------------------
 
@@ -201,12 +183,12 @@ INSERT INTO `productos` (`id`, `price`, `categoryID`, `name`) VALUES
 (23, '1700.00', 4, 'Negroni Pintón'),
 (24, '1200.00', 4, 'Scottish Julep'),
 (25, '320.00', 6, 'Limonada'),
-(26, '0.00', 6, 'Limonada de maracuya'),
-(27, '0.00', 6, 'Limonada de naranja'),
-(28, '0.00', 6, 'Agua'),
-(29, '0.00', 6, 'Agua saborizada'),
-(30, '0.00', 6, 'Gaseosa'),
-(32, '450.00', 0, 'cerdo con salsa Teriyaki');
+(26, '330.00', 6, 'Limonada de maracuya'),
+(27, '310.00', 6, 'Limonada de naranja'),
+(28, '100.00', 6, 'Agua'),
+(29, '200.00', 6, 'Agua saborizada'),
+(30, '300.00', 6, 'Gaseosa'),
+(31, '450.00', 0, 'cerdo con salsa Teriyaki');
 
 -- --------------------------------------------------------
 
@@ -408,6 +390,23 @@ ALTER TABLE `reabastecimientos`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+insert into compras (productoID, cantidad,	fecha_y_hora,	precio	) SELECT productoID	,cantidad,	fecha_y_hora,	precio FROM compras	;
+
+UPDATE compras set fecha_y_hora=DATE_ADD(now(), INTERVAL -((RAND()*8766)) HOUR), productoID=ROUND(RAND()*31), cantidad=ROUND(RAND()*3);
+UPDATE compras INNER JOIN productos on compras.productoID=productos.id set compras.precio=productos.price*compras.cantidad;
+  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

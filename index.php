@@ -34,10 +34,10 @@ if (!isset($_SESSION["id"])){
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>    <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
-    <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" integrity="sha512-8Q6Y9XnTbOE+JNvjBQwJ2H8S+UV4uA6hiRykhdtIyDYZ2TprdNmWOUaKdGzOhyr4dCyk287OejbPvwl7lrfqrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" integrity="sha512-MOCpqoRoisCTwJ8vQQiciZv0qcpROCidek3GTFS6KTk2+y7munJIlKCVkFCYY+p3ErYFXCjmFjnfTTRSC1OHWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js" integrity="sha512-M1OTu9xD1JPdXo2cOeJI+Z/f8P6E/pqK9ug3G8PRNLw1caUePewEmpFYKSYh4LEz483qnyB/UTlgX1Q4VCEsKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.16/Recharts.min.js" integrity="sha512-qQmQ5lcd+nH2LQzdilwN9t3iMaknsKZ+Es4HKjurwjW0njNWYlj1n/O1ghNHU8hAvHNEqnb6BfOE2uqbdPk9TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!--
     <link rel="stylesheet" href="cdn/bootstrap.min.css">
     <link rel="stylesheet" href="cdn/all.css">
@@ -50,9 +50,7 @@ if (!isset($_SESSION["id"])){
     <script src="js/apexcharts.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.36.3/apexcharts.min.css" integrity="sha512-tJYqW5NWrT0JEkWYxrI4IK2jvT7PAiOwElIGTjALSyr8ZrilUQf+gjw2z6woWGSZqeXASyBXUr+WbtqiQgxUYg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 -->
-<script src="https://d3js.org/d3.v6.min.js"></script>    
 
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     
     <script> var exports = {}; </script>
 
