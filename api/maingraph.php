@@ -12,17 +12,29 @@ require_once('../assets/api.php');
 
 $range = getpost("rango");
 authenticate();
+
+/* mejor manera de todos
+SET @unixstartday := (SELECT UNIQUE UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras);
+SET @dias_desde_comienzo := (SELECT UNIQUE UNIX_TIMESTAMP(NOW())/60/60/24-@unixstartday  FROM compras);
+SELECT UNIQUE ROUND((UNIX_TIMESTAMP(fecha_y_hora)/60/60/24 - @unixstartday)/@dias_desde_comienzo, 1)*@dias_desde_comienzo FROM compras
+
+
+*/
+
+
 //[grupos de fechas, fecha minima, fecha maxima]
 $dates=[
   "hoy"=>["ROUND(EXTRACT(HOUR FROM fecha_y_hora)*5, -1)/5", "DATE(now())", "DATE_ADD(DATE(now()), INTERVAL 1 DAY) "],
   "ayer"=>["ROUND(EXTRACT(HOUR FROM fecha_y_hora)*5, -1)/5", "DATE_ADD(DATE(now()), INTERVAL -1 DAY)", "DATE(NOW())"],
   "semana"=>["UNIX_TIMESTAMP(DATE(fecha_y_hora))", "DATE_ADD(DATE(now()), INTERVAL -7 DAY)", "NOW()"],
   "mes"=>["ROUND(EXTRACT(DAY FROM fecha_y_hora)*(10.0/3.0), -1)/(10.0/3.0)", "DATE_ADD(DATE(now()), INTERVAL -30 DAY)", "NOW()"],
-  "todo"=>["TODO","2000-01-01 01:00:00","NOW()"],
+  "todo"=>["ROUND((UNIX_TIMESTAMP(fecha_y_hora)/60/60/24 - (SELECT UNIQUE UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras))/(SELECT UNIQUE ROUND(UNIX_TIMESTAMP(NOW())/60/60/24-(SELECT UNIQUE UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras) ,0)  FROM compras), 1)*(SELECT UNIQUE ROUND(UNIX_TIMESTAMP(NOW())/60/60/24-(SELECT UNIQUE UNIX_TIMESTAMP(MIN(fecha_y_hora))/60/60/24  FROM compras) ,0)  FROM compras)",
+    "FROM_UNIXTIME(0)","NOW()"],
   "rango"=>["TODO","",""]
 ];
 
 //echo "SELECT {$dates[$rango][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$rango][1]} AND fecha_y_hora < {$dates[$rango][2]} GROUP BY fecha_grupo ";
+//error_log("SELECT {$dates[$range][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$range][1]} AND fecha_y_hora < {$dates[$range][2]} GROUP BY fecha_grupo ");
 $arrayfechas=entries("SELECT {$dates[$range][0]} AS fecha_grupo , precio*cantidad AS preciofinal FROM compras WHERE fecha_y_hora > {$dates[$range][1]} AND fecha_y_hora < {$dates[$range][2]} GROUP BY fecha_grupo ");
 
 for ($x=0;$x<count($arrayfechas);$x++){
@@ -36,14 +48,14 @@ for ($x=0;$x<count($arrayfechas);$x++){
         //$x++;
       }
       break;
-    case "semana":
+    case "semana": ///TODO add better interpolation here, month, and in products
       $arrayfechas[$x]["fecha_grupo"]=date('D', $arrayfechas[$x]["fecha_grupo"]);
       break; 
     case "mes":
       $interval=30-intval($arrayfechas[$x]["fecha_grupo"]);
       $cdate = new DateTime();
       $cdate->setTime(0,0,0,0)->sub(new DateInterval("P${interval}D"));
-      $arrayfechas[$x]["fecha_grupo"]=date('D', $cdate);
+      $arrayfechas[$x]["fecha_grupo"]=$cdate->format('d/m');
       break; 
   }
 }

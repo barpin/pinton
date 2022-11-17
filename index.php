@@ -79,8 +79,8 @@ if (!isset($_SESSION["id"])){
   
     <div class="menu navbar ">  
         <a class="nav-item" href="#" style="float: left;"><img src="./img/bar logo.png" width="50" height="50"></a>
-        <a class="nav-item" href="#" >Vista General</a>
-        <a class="nav-item" href="#" >Productos</a>
+        <a class="nav-item" onclick="getpage('vista_general')" href="#" >Vista General</a>
+        <a class="nav-item" onclick="getpage('vista_productos')" href="#">Productos</a>
         <!--<a class="nav-item" href="#" >Ventas</a>
         <a class="nav-item" href="#" >Stock</a>
         <a class="nav-item" href="#" >Clientes  </a> -->

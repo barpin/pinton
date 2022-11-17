@@ -1,5 +1,8 @@
 <?php
-
+//https://www.chartjs.org/docs/latest/
+//https://gionkunz.github.io/chartist-js/
+//https://dygraphs.com/gallery/
+//https://www.sigmajs.org/
 require_once('../assets/api.php');
 
 $range = getpost("rango");
@@ -13,7 +16,7 @@ $dates=[
   "ayer"=>["DATE_ADD(DATE(now()), INTERVAL -1 DAY)", "DATE(NOW())"],
   "semana"=>["DATE_ADD(DATE(now()), INTERVAL -7 DAY)", "NOW()"],
   "mes"=>["DATE_ADD(DATE(now()), INTERVAL -30 DAY)", "NOW()"],
-  "todo"=>["2000-01-01 01:00:00","NOW()"],
+  "todo"=>["FROM_UNIXTIME(0)","NOW()"],
   "rango"=>["TODO",""]
 ];
 

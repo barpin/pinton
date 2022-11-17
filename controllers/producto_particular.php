@@ -53,17 +53,11 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
       <div class="rowcont" id='maingraph'>
         
           <span>
-            Todas 
-            las 
-            <select name="dog-names" id="dog-names">
-              <option value="hoy" default>ventas</option>
-              <option value="ayer">reabastecimientos</option>
-            </select>
-            <select name="date-select" id="date-select" onchange="updateVistaGeneral()">
-              <option value="hoy" default>hoy</option>
+            <select name="date-select" id="date-select" onchange="updatePP()">
+              <option value="hoy" >hoy</option>
               <option value="ayer">ayer</option>
               <option value="semana">ultima semana</option>
-              <option value="mes">ultimo mes</option>
+              <option value="mes" default>ultimo mes</option>
               <option value="todo">todo</option>
             </select>
 
@@ -74,115 +68,20 @@ if(intval(entries("SELECT (perms & 2)!=2 FROM users WHERE id = ${_SESSION["id"]}
             a
           </div>
           <div style="" class="rowcont" id="masdatos">
+            <br>
           <span>Total</span>
             <div style="display:flex;color:red;align-items:flex-end;" id="totalventas"><span>100$</span><span style="font-size:0.7rem;white-space:nowrap;">▼ 15%</span></div>
             <span>C. Ventas</span>
             <div style="display:flex;color:green;align-items:flex-end;" id="cantventas"><span>10$</span><span style="font-size:0.7rem;white-space:nowrap;">▲ 30%</span></div>
-            <span>% Mesas</span>
-            <div style="display:flex;color:gray;align-items:flex-end;"><span>50%</span><span style="font-size:0.7rem;white-space:nowrap;">■ 0%</span></div>
+            <br>
+            <br>
+            <br>
+            <br>
           </div>
         </div>
       </div>
-      <div style="" class="rowcont" id='donuts'>
-
-        <div style="width:100%;align-content:space-around" class="colcont" id='donutrow1'>
-        <div class="donut" id='donut1'>dpnut3</div><div class="donut" id='donut2'>donut4</div>
-        </div>
-        <div style="width:100%;align-content:space-around" class="colcont" id="donutrow2">
-          <div class="donut" id='donut2'>dpnut3</div><div class="donut" id='donut4'>donut4</div>
-        </div>
-      </div>
-    </div>
-    <div class="colcont" id='data_recent'>
-      <div style="" class="rowcont" id='numberdetails'>
-        
-        <span>Medio de Pago</span>
-        <span>Efectivo</span>
-        <div style="width:100%" class="flex flex-row">
-          <span>15$</span>
-          <span>100$</span>
-        </div>
-        <span>Tarjeta</span>
-        <div style="width:100%" class="flex flex-row">
-          <span>100$</span>
-          <span>153,5$</span>
-        </div>
-        <span>MercadoPago</span>
-        <div style="width:100%" class="flex flex-row">
-          <span>100$</span>
-          <span>153,5$</span>
-        </div>
-      </div>
-      <div style="" class="rowcont" id='stock_graphs'>
-        <div style="width:100%;height:33%;" class="colcont" id='stockrow1'>
-          <div style="width:100%;height:100%;" class="colcont stockinfo" id='stock1'>
-            <div>
-              stockgraph
-            </div>
-            <div>
-              <span>Quedan</span><br>
-              <span>100 kg</span><br>
-              <span>de Queso</span>
-            </div>
-          </div>
-          <div style="width:100%;height:100%;" class="colcont stockinfo" id='stock2'>
-            <div>
-            stockgraph
-            </div>
-            <div>
-            <span>Quedan</span><br>
-              <span>100 kg</span><br>
-              <span>de Queso</span>
-            </div>
-          </div>
-        </div>  
-        <div style="width:100%;height:33%;" class="colcont " id='stockrow2'>
-          <div style="width:100%;height:100%;" class="colcont stockinfo" id='stock3'>
-            <div>
-              stockgraph
-            </div>
-            <div>
-            <span>Quedan</span><br>
-              <span>100 kg</span><br>
-              <span>de Queso</span>
-            </div>
-          </div>
-          <div style="width:100%;height:100%;" class="colcont stockinfo" id='stock4'>
-            <div>
-            stockgraph
-            </div>
-            <div>
-            <span>Quedan</span><br>
-              <span>100 kg</span><br>
-              <span>de Queso</span>
-            </div>
-          </div>
-        </div>  
-        <div style="width:100%;height:33%;" class="colcont" id='stockrow3'>
-          <div style="width:100%;height:100%;" class="colcont stockinfo" id='stock5'>
-            <div>
-              stockgraph
-            </div>
-            <div>
-            <span>Quedan</span><br>
-              <span>100 kg</span><br>
-              <span>de Queso</span>
-            </div>
-          </div>
-          <div style="width:100%;height:100%;" class="colcont stockinfo" id='stock6'>
-            <div>
-            stockgraph
-            </div>
-            <div>
-            <span>Quedan</span><br>
-              <span>100 kg</span><br>
-              <span>de Queso</span>
-            </div>
-          </div>
-        </div>  
-      </div>
-      <div style="max-height:35vh;overflow:auto;" class="rowcont overflow-auto" id='compras_recientes'>
-        <span>Compras recientes</span>
+      <div style="" class="rowcont" id='ingredientes'>
+        <span>Ingredientes</span>
         <table style="width:100%;display:block;" class="" id='compras_recientes_content'>
         
         </table>

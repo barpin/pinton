@@ -11,7 +11,7 @@ $dates=[
   "ayer"=>["DATE_ADD(DATE(now()), INTERVAL -1 DAY)",   "DATE(NOW())",                            "DATE_ADD(DATE(NOW()), INTERVAL -2 DAY)"],
   "semana"=>["DATE_ADD(DATE(now()), INTERVAL -7 DAY)", "NOW()",                                  "DATE_ADD(DATE(NOW()), INTERVAL -14 DAY)"],
   "mes"=>["DATE_ADD(DATE(now()), INTERVAL -30 DAY)",   "NOW()",                                  "DATE_ADD(DATE(NOW()), INTERVAL -60 DAY)"],
-  "todo"=>["2000-01-01 01:00:00",                       "NOW()",                                  "DATE_ADD(DATE(NOW()), INTERVAL -42323 DAY)"],
+  "todo"=>["FROM_UNIXTIME(0)",                       "NOW()",                                  "FROM_UNIXTIME(0)"],
   "rango"=>["TODO",""]
 ];
 
@@ -19,7 +19,7 @@ $dates=[
 
 //viejo, nuevo
 function percentdiff($n1, $n2){
-  return intval($n2) ? $n2/$n1*100-100 : 999;   //($n1-$n2)/(($n1+$n2)/2)
+  return intval($n2) && intval($n1) ? $n2/$n1*100-100 : 999;   //($n1-$n2)/(($n1+$n2)/2)
 ;}
 
 $totales=[entries(<<<EOL
